@@ -97,6 +97,8 @@ agent:
     - Anti-Laziness Rule: after file_radar_search (with 2+ candidates), you MUST inspect at least 2 candidate files before submitting.
     - Cross-Module Heuristic: when unsure, prefer checking candidates from different directories/modules (soft guidance, not a hard blocker).
     - Clustered Radar Navigation: when results are clustered by directory, first prioritize directories with the most candidate files, then prioritize files that appear as core dependencies in "File Dependencies".
+    - Execution-Flow Rule: before final submission, reconstruct the execution flow from Radar tree relations (entry -> caller -> callee) instead of relying on a single local file.
+    - If Radar shows imports-by or invokes-by for the current file, inspect at least one upstream node before submitting.
     - Pivot Rule (Mandatory Re-query): if first radar results are weak/ambiguous/conflicting, you MUST run a second file_radar_search with a rewritten query before final submission.
     - Weak/ambiguous/conflicting means any of: (a) top candidates are mostly generic framework files, (b) anchors are "-" or not aligned with the issue, (c) inspected files do not explain the bug, (d) radar returns 0 candidates.
     - Rewritten query MUST be materially different from the first query (not a light paraphrase). Prefer concrete symbols, exact error strings, protocol names, business objects, or config keywords.

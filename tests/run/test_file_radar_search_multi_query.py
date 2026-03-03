@@ -62,7 +62,7 @@ def test_fuse_ranked_files_prefers_multi_query_support(tmp_path: Path):
         ],
     ]
 
-    fused = tool._fuse_ranked_files(ranked_by_query, query_count=3)
+    fused = tool._fuse_ranked_files(ranked_by_query, query_count=3, query_terms={"src", "a"})
 
     assert fused[0]["path"] == "src/a.py"
     assert fused[0]["support_count"] == 3
@@ -126,6 +126,57 @@ def test_format_results_clustered_groups_by_directory_without_scores(tmp_path: P
     assert "📂" not in output
 
 
+def test_format_results_clustered_embeds_bidirectional_deps_and_entity_ids(tmp_path: Path):
+    tool = _build_tool(tmp_path, display_mode="clustered")
+    output = tool._format_results(
+        "auth",
+        [
+            {"path": "src/auth/a.py", "score": 0.91, "evidence_count": 3},
+            {"path": "src/auth/b.py", "score": 0.82, "evidence_count": 4},
+        ],
+        auto_skeleton={
+            "enabled": True,
+            "files": [
+                {
+                    "rank": 1,
+                    "path": "src/auth/a.py",
+                    "anchors_items": ["foo(function)[L10-L20]"],
+                    "anchor_names": ["foo"],
+                    "context_glimpse_items": ["bar(function)[L30-L40]"],
+                    "context_glimpse_names": ["bar"],
+                    "scope_summary": "classes=0, methods=0, functions=2",
+                    "folded_symbols_count": 2,
+                    "folded_imports_count": 0,
+                    "primary_anchor": {"start": 10, "end": 20},
+                    "call_graph": {"foo": ["bar"]},
+                    "reverse_graph": {"bar": ["foo"]},
+                }
+            ],
+            "cross_file_deps": {"src/auth/a.py": ["src/auth/b.py"]},
+        },
+    )
+
+    assert "-- Dependencies --" not in output
+    assert "imports -> src/auth/b.py (evidence: 4)" in output
+    assert "imports-by <- src/auth/a.py (evidence: 3)" in output
+    assert "src/auth/a.py:foo" in output
+    assert "invokes -> src/auth/a.py:bar" in output
+    assert "invokes-by <- src/auth/a.py:foo" in output
+
+
+def test_format_results_clustered_uses_tree_connectors(tmp_path: Path):
+    tool = _build_tool(tmp_path, display_mode="clustered")
+    output = tool._format_results(
+        "auth",
+        [{"path": "src/auth/a.py", "score": 0.91, "evidence_count": 3}],
+        auto_skeleton={"enabled": True, "files": [], "cross_file_deps": {}},
+    )
+
+    assert "[FILE] src/auth/a.py" in output
+    assert "Next-Step Playbook:" in output
+    assert "Reconstruct execution flow" in output
+
+
 def test_effective_queries_auto_expands_single_query(tmp_path: Path):
     tool = _build_tool(tmp_path, auto_query_expansion_enabled=True, auto_query_expansion_max_queries=3)
     parsed = FileRadarSearchArgs.from_raw({"query": "switch socket on off async_turn_on fritzbox"})
@@ -137,11 +188,25 @@ def test_effective_queries_auto_expands_single_query(tmp_path: Path):
     assert expanded is True
 
 
-def test_effective_queries_respects_explicit_queries_without_auto_expansion(tmp_path: Path):
+def test_effective_queries_expands_explicit_single_query_when_enabled(tmp_path: Path):
     tool = _build_tool(tmp_path, auto_query_expansion_enabled=True, auto_query_expansion_max_queries=3)
     parsed = FileRadarSearchArgs.from_raw({"queries": ["switch socket on off"]})
 
     effective, expanded = tool._effective_queries(parsed)
 
-    assert effective == ["switch socket on off"]
-    assert expanded is False
+    assert effective[0] == "switch socket on off"
+    assert 1 < len(effective) <= 3
+    assert expanded is True
+
+
+def test_effective_queries_keeps_user_queries_and_can_append_one_variant(tmp_path: Path):
+    tool = _build_tool(tmp_path, auto_query_expansion_enabled=True, auto_query_expansion_max_queries=3)
+    parsed = FileRadarSearchArgs.from_raw(
+        {"queries": ["switch socket on off", "async_turn_on fritzbox"]}
+    )
+
+    effective, expanded = tool._effective_queries(parsed)
+
+    assert effective[:2] == ["switch socket on off", "async_turn_on fritzbox"]
+    assert len(effective) == 3
+    assert expanded is True

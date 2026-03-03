@@ -46,6 +46,15 @@ def build_reverse_graph(graph: dict[str, list[str]]) -> dict[str, list[str]]:
     return {k: sorted(v) for k, v in reverse.items()}
 
 
+def build_reverse_deps(deps: dict[str, list[str]]) -> dict[str, list[str]]:
+    """Build reverse dependency mapping (who imports this file)."""
+    reverse: dict[str, list[str]] = defaultdict(list)
+    for src, targets in deps.items():
+        for target in targets:
+            reverse[target].append(src)
+    return {k: sorted(v) for k, v in reverse.items()}
+
+
 def extract_imports_from_source(source: str) -> list[str]:
     """Extract import module paths."""
     try:
@@ -111,18 +120,33 @@ def build_focused_tree(relevant_files: list[str]) -> str:
     return "\n".join(lines)
 
 
+def build_entity_id(file_path: str, symbol_name: str) -> str:
+    """Build a stable entity id: path:symbol."""
+    path = str(file_path or "").strip()
+    symbol = str(symbol_name or "").strip()
+    if not path:
+        return symbol
+    if not symbol:
+        return path
+    return f"{path}:{symbol}"
+
+
 def format_call_relations(
     symbol_name: str,
     call_graph: dict[str, list[str]],
     reverse_graph: dict[str, list[str]],
+    *,
+    file_path: str | None = None,
 ) -> str:
-    """Format call relations for a symbol as a compact string."""
+    """Format call relations for a symbol as explicit typed edges."""
     lookup = symbol_name.rsplit(".", 1)[-1] if "." in symbol_name else symbol_name
     parts = []
     callees = call_graph.get(lookup, [])
     if callees:
-        parts.append(f"calls → {', '.join(callees)}")
+        rendered = ", ".join(build_entity_id(file_path or "", callee) for callee in callees)
+        parts.append(f"invokes -> {rendered}")
     callers = reverse_graph.get(lookup, [])
     if callers:
-        parts.append(f"called by ← {', '.join(callers)}")
+        rendered = ", ".join(build_entity_id(file_path or "", caller) for caller in callers)
+        parts.append(f"invokes-by <- {rendered}")
     return " | ".join(parts)

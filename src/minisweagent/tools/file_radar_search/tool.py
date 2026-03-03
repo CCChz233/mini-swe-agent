@@ -15,7 +15,9 @@ from typing import Any
 from minisweagent.tools.base import ToolResult
 from minisweagent.tools.code_search.chunkers import Chunk, SlidingChunker
 from minisweagent.tools.file_radar_search.radar_nav import (
+    build_entity_id,
     build_focused_tree,
+    build_reverse_deps,
     build_reverse_graph,
     extract_call_graph,
     find_cross_file_deps,
@@ -464,19 +466,85 @@ class FileRadarSearchTool:
         return variants[:max_queries]
 
     def _effective_queries(self, parsed: FileRadarSearchArgs) -> tuple[list[str], bool]:
-        if len(parsed.queries) > 1:
-            return parsed.queries, False
-        if parsed.queries_provided:
-            return parsed.queries, False
+        base_queries = list(parsed.queries)
         if not self.config.auto_query_expansion_enabled:
-            return parsed.queries, False
-        expanded = self._auto_expand_query(
-            parsed.queries[0],
-            max_queries=max(1, int(self.config.auto_query_expansion_max_queries)),
-        )
-        if not expanded:
-            return parsed.queries, False
-        return expanded, len(expanded) > len(parsed.queries)
+            return base_queries, False
+
+        max_queries = max(1, int(self.config.auto_query_expansion_max_queries))
+        if len(base_queries) >= max_queries:
+            return base_queries[:max_queries], False
+
+        seed = " ".join(base_queries)
+        expanded = self._auto_expand_query(seed, max_queries=max_queries)
+        merged: list[str] = []
+        seen: set[str] = set()
+        for query in [*base_queries, *expanded]:
+            text = " ".join(str(query).split())
+            if not text:
+                continue
+            lowered = text.lower()
+            if lowered in seen:
+                continue
+            seen.add(lowered)
+            merged.append(text)
+            if len(merged) >= max_queries:
+                break
+
+        if not merged:
+            return base_queries, False
+        return merged, len(merged) > len(base_queries)
+
+    def _query_terms(self, query: str) -> set[str]:
+        raw_tokens = re.findall(r"[A-Za-z0-9_./:-]+", str(query or ""))
+        terms: set[str] = set()
+        for token in raw_tokens:
+            cleaned = token.strip(".,;:()[]{}<>\"'").lower()
+            if len(cleaned) < 2:
+                continue
+            terms.add(cleaned)
+            for part in re.split(r"[./:_-]+", cleaned):
+                if len(part) < 2:
+                    continue
+                if part in _QUERY_STOPWORDS:
+                    continue
+                terms.add(part)
+        return terms
+
+    def _path_query_overlap_score(self, path: str, query_terms: set[str]) -> float:
+        if not path or not query_terms:
+            return 0.0
+        lowered_path = path.lower()
+        path_parts = {part for part in re.split(r"[./:_-]+", lowered_path) if part}
+        if not path_parts:
+            return 0.0
+
+        score = 0.0
+        for term in query_terms:
+            if term in path_parts:
+                score += 1.0
+                continue
+            if len(term) >= 4 and term in lowered_path:
+                score += 0.5
+        if score <= 0:
+            return 0.0
+        # Cap to keep lexical hints as a tie-breaker, not a hard override.
+        return max(0.0, min(1.0, score / 3.0))
+
+    def _rerank_with_query_terms(self, ranked: list[dict[str, Any]], query_terms: set[str]) -> list[dict[str, Any]]:
+        if not ranked or not query_terms:
+            return ranked
+        reranked: list[dict[str, Any]] = []
+        for item in ranked:
+            path = str(item.get("path") or "")
+            overlap = self._path_query_overlap_score(path, query_terms)
+            base_score = float(item.get("score", 0.0) or 0.0)
+            combined = 0.92 * base_score + 0.08 * overlap
+            enriched = dict(item)
+            enriched["path_match_score"] = overlap
+            enriched["score"] = combined
+            reranked.append(enriched)
+        reranked.sort(key=lambda entry: (float(entry.get("score", 0.0)), int(entry.get("evidence_count", 0))), reverse=True)
+        return reranked
 
     def _build_embedder(self):
         provider = self.config.embedding_provider
@@ -509,13 +577,20 @@ class FileRadarSearchTool:
                 )
                 filters = parse_filters(parsed.filters)
                 effective_queries, query_expanded = self._effective_queries(parsed)
+                query_terms = self._query_terms(" ".join(effective_queries))
                 query_vectors = self.embedder.embed(effective_queries)
                 ranked_by_query: list[list[dict[str, Any]]] = []
                 for query_vec in query_vectors:
                     blocks = index.search_blocks(query_vec, topk=parsed.topk_blocks, filters=filters)
                     ranked = self._rank_files(blocks, repo_path, repo_dir)
+                    if len(effective_queries) == 1:
+                        ranked = self._rerank_with_query_terms(ranked, query_terms)
                     ranked_by_query.append(ranked)
-                fused_ranked = self._fuse_ranked_files(ranked_by_query, query_count=len(effective_queries))
+                fused_ranked = self._fuse_ranked_files(
+                    ranked_by_query,
+                    query_count=len(effective_queries),
+                    query_terms=query_terms,
+                )
                 repo_root = repo_path.resolve()
                 existing_only = [item for item in fused_ranked if self._candidate_exists(repo_root, item["path"])]
                 structured = existing_only[: parsed.topk_files]
@@ -617,7 +692,13 @@ class FileRadarSearchTool:
         ranked.sort(key=lambda item: (item["score"], item["evidence_count"]), reverse=True)
         return ranked
 
-    def _fuse_ranked_files(self, ranked_by_query: list[list[dict[str, Any]]], *, query_count: int) -> list[dict[str, Any]]:
+    def _fuse_ranked_files(
+        self,
+        ranked_by_query: list[list[dict[str, Any]]],
+        *,
+        query_count: int,
+        query_terms: set[str] | None = None,
+    ) -> list[dict[str, Any]]:
         if not ranked_by_query:
             return []
         if query_count <= 1:
@@ -653,6 +734,7 @@ class FileRadarSearchTool:
                     entry["language"] = item.get("language")
 
         fused: list[dict[str, Any]] = []
+        normalized_query_terms = query_terms or set()
         for entry in merged.values():
             support_count = int(entry["support_count"])
             support_ratio = support_count / float(query_count)
@@ -662,7 +744,9 @@ class FileRadarSearchTool:
                 else 0.0
             )
             dense_mean = max(0.0, min(1.0, dense_mean))
-            fusion_score = 0.6 * support_ratio + 0.4 * dense_mean
+            rrf_norm = max(0.0, min(1.0, (float(entry["rrf_score"]) * 61.0) / float(query_count)))
+            path_match = self._path_query_overlap_score(str(entry["path"]), normalized_query_terms)
+            fusion_score = 0.45 * support_ratio + 0.35 * dense_mean + 0.15 * rrf_norm + 0.05 * path_match
             fused.append(
                 {
                     "path": entry["path"],
@@ -673,12 +757,14 @@ class FileRadarSearchTool:
                     "query_count": query_count,
                     "rrf_score": float(entry["rrf_score"]),
                     "dense_mean_score": dense_mean,
+                    "rrf_norm_score": rrf_norm,
+                    "path_match_score": path_match,
                 }
             )
         fused.sort(
             key=lambda item: (
-                int(item.get("support_count", 0)),
                 float(item.get("score", 0.0)),
+                int(item.get("support_count", 0)),
                 float(item.get("rrf_score", 0.0)),
                 int(item.get("evidence_count", 0)),
             ),
@@ -764,6 +850,32 @@ class FileRadarSearchTool:
             seen.add(path)
         return ordered
 
+    def _format_dependency_targets(
+        self,
+        targets: list[str],
+        *,
+        result_by_path: dict[str, dict[str, Any]],
+        max_targets: int = 5,
+    ) -> str:
+        shown = list(targets)[:max_targets]
+        rendered: list[str] = []
+        for target in shown:
+            ref = result_by_path.get(target, {})
+            evidence = int(ref.get("evidence_count", 0) or 0)
+            if evidence > 0:
+                rendered.append(f"{target} (evidence: {evidence})")
+            else:
+                rendered.append(target)
+        suffix = f", ... (+{len(targets) - len(shown)})" if len(targets) > len(shown) else ""
+        return ", ".join(rendered) + suffix
+
+    def _tree_header(self, *, is_last: bool, text: str) -> str:
+        return f"     {'└──' if is_last else '├──'} {text}"
+
+    def _tree_leaf(self, *, parent_is_last: bool, is_last: bool, text: str) -> str:
+        stem = "         " if parent_is_last else "     │   "
+        return f"{stem}{'└──' if is_last else '├──'} {text}"
+
     def _format_results(
         self,
         query: str,
@@ -776,8 +888,148 @@ class FileRadarSearchTool:
         if mode not in {"ranked", "blind_alpha", "clustered"}:
             mode = "ranked"
 
-        lines = [f'Found {len(results)} candidate files for "{query}":', ""]
+        result_by_path = {
+            str(item.get("path") or ""): item
+            for item in results
+            if isinstance(item, dict) and str(item.get("path") or "")
+        }
+        cross_deps_raw = auto_skeleton.get("cross_file_deps", {})
+        cross_deps = cross_deps_raw if isinstance(cross_deps_raw, dict) else {}
+        reverse_deps = build_reverse_deps(cross_deps) if cross_deps else {}
+
         display_paths: list[str] = [str(item.get("path") or "") for item in results if item.get("path")]
+        files = auto_skeleton.get("files", [])
+        if isinstance(files, list) and files:
+            files = self._order_auto_skeleton_files(files, display_paths=display_paths)
+        skeleton_by_path = {
+            str(item.get("path") or ""): item
+            for item in files
+            if isinstance(item, dict) and str(item.get("path") or "")
+        }
+
+        if mode == "clustered":
+            lines = [f'Found {len(results)} candidate files for "{query}". (Clustered by Directory):', ""]
+            clusters, clustered_paths = self._clustered_display_order(results)
+            display_paths = clustered_paths
+            if files:
+                files = self._order_auto_skeleton_files(files, display_paths=display_paths)
+                skeleton_by_path = {
+                    str(item.get("path") or ""): item
+                    for item in files
+                    if isinstance(item, dict) and str(item.get("path") or "")
+                }
+
+            for directory, items in clusters:
+                dir_label = "./" if directory == "." else f"{directory}/"
+                lines.append(f"[DIR] {dir_label}")
+                for item in items:
+                    path = str(item.get("path") or "")
+                    evidence_count = int(item.get("evidence_count", 0) or 0)
+                    lines.append(f"  [FILE] {path} (evidence: {evidence_count})")
+                    support_count = item.get("support_count")
+                    query_count = item.get("query_count")
+                    if isinstance(support_count, int) and isinstance(query_count, int) and query_count > 1:
+                        lines.append(f"     support: {support_count}/{query_count} queries")
+
+                    branches: list[tuple[str, list[str]]] = []
+                    imports = sorted({str(target) for target in cross_deps.get(path, []) if str(target).strip()})
+                    if imports:
+                        branches.append(
+                            (
+                                f"imports -> {self._format_dependency_targets(imports, result_by_path=result_by_path)}",
+                                [],
+                            )
+                        )
+                    imports_by = sorted({str(src) for src in reverse_deps.get(path, []) if str(src).strip()})
+                    if imports_by:
+                        branches.append(
+                            (
+                                f"imports-by <- {self._format_dependency_targets(imports_by, result_by_path=result_by_path)}",
+                                [],
+                            )
+                        )
+
+                    sk = skeleton_by_path.get(path)
+                    if sk:
+                        cg = sk.get("call_graph", {})
+                        rg = sk.get("reverse_graph", {})
+
+                        anchor_items = sk.get("anchors_items", [])
+                        anchor_names = sk.get("anchor_names", [])
+                        anchor_lines: list[str] = []
+                        if isinstance(anchor_items, list) and anchor_items:
+                            for i, text in enumerate(anchor_items):
+                                entity_name = anchor_names[i] if i < len(anchor_names) and anchor_names[i] else ""
+                                entity_id = build_entity_id(path, entity_name)
+                                anchor_lines.append(f"{entity_id} :: {text}" if entity_name else str(text))
+                                if entity_name:
+                                    rel = format_call_relations(entity_name, cg, rg, file_path=path)
+                                    if rel:
+                                        anchor_lines.append(rel)
+                        else:
+                            anchor_lines.append("-")
+                        branches.append(("[ANCHORS]", anchor_lines[:8]))
+
+                        glimpse_items = sk.get("context_glimpse_items", [])
+                        glimpse_names = sk.get("context_glimpse_names", [])
+                        glimpse_lines: list[str] = []
+                        if isinstance(glimpse_items, list) and glimpse_items:
+                            for i, text in enumerate(glimpse_items):
+                                entity_name = glimpse_names[i] if i < len(glimpse_names) and glimpse_names[i] else ""
+                                entity_id = build_entity_id(path, entity_name)
+                                glimpse_lines.append(f"{entity_id} :: {text}" if entity_name else str(text))
+                                if entity_name:
+                                    rel = format_call_relations(entity_name, cg, rg, file_path=path)
+                                    if rel:
+                                        glimpse_lines.append(rel)
+                        else:
+                            glimpse_lines.append("-")
+                        branches.append(("[GLIMPSE]", glimpse_lines[:8]))
+
+                        scope_summary = str(sk.get("scope_summary") or "").strip()
+                        if scope_summary:
+                            branches.append((f"[SCOPE] {scope_summary}", []))
+                        branches.append(
+                            (
+                                "[FOLDED] "
+                                f"symbols={int(sk.get('folded_symbols_count', 0))}, "
+                                f"imports={int(sk.get('folded_imports_count', 0))}",
+                                [],
+                            )
+                        )
+                        primary_anchor = sk.get("primary_anchor", {})
+                        if isinstance(primary_anchor, dict) and primary_anchor.get("start") and primary_anchor.get("end"):
+                            start = int(primary_anchor["start"])
+                            end = int(primary_anchor["end"])
+                            branches.append((f"[NEXT] sed -n '{start},{end}p' {path}", []))
+                        else:
+                            branches.append((f"[NEXT] @tool list_symbols --file \"{path}\"", []))
+                        if sk.get("error"):
+                            branches.append((f"[SKELETON_ERROR] {sk['error']}", []))
+
+                    for index, (header, children) in enumerate(branches):
+                        is_last_branch = index == len(branches) - 1
+                        lines.append(self._tree_header(is_last=is_last_branch, text=header))
+                        if not children:
+                            continue
+                        for child_index, child in enumerate(children):
+                            is_last_child = child_index == len(children) - 1
+                            lines.append(self._tree_leaf(parent_is_last=is_last_branch, is_last=is_last_child, text=child))
+                lines.append("")
+
+            lines.extend(
+                [
+                    "Next-Step Playbook:",
+                    "1) Reconstruct execution flow before submission (entry -> caller -> callee).",
+                    "2) If a file has imports-by or invokes-by relations, inspect at least one upstream node before final output.",
+                    "3) If tree evidence is weak/ambiguous, rewrite query with concrete entities and call file_radar_search again.",
+                    "",
+                    "Tip: Prefer submitting complete entity ids (path.py:Class.method or path.py:function).",
+                ]
+            )
+            return "\n".join(lines).strip()
+
+        lines = [f'Found {len(results)} candidate files for "{query}":', ""]
         if mode == "ranked":
             for idx, item in enumerate(results, start=1):
                 lines.extend(self._render_candidate_entry(item, index=idx, include_score=True))
@@ -786,19 +1038,9 @@ class FileRadarSearchTool:
             display_paths = [str(item.get("path") or "") for item in alpha_items if item.get("path")]
             for item in alpha_items:
                 lines.extend(self._render_candidate_entry(item, include_score=False))
-        else:
-            clusters, clustered_paths = self._clustered_display_order(results)
-            display_paths = clustered_paths
-            for directory, items in clusters:
-                dir_label = "./" if directory == "." else f"{directory}/"
-                lines.append(f"[DIR] {dir_label}")
-                for item in items:
-                    lines.extend(self._render_candidate_entry(item, include_score=False, bullet_prefix="  "))
-                lines.append("")
 
         directory_tree = auto_skeleton.get("directory_tree", "")
-        cross_deps = auto_skeleton.get("cross_file_deps", {})
-        if directory_tree and mode != "clustered":
+        if directory_tree:
             lines.extend(["", "-- Directory Context --", directory_tree])
         if cross_deps:
             lines.extend(["", "-- Dependencies --"])
@@ -815,9 +1057,6 @@ class FileRadarSearchTool:
             if len(dep_items) > max_dep_sources:
                 lines.append(f"  ... ({len(dep_items) - max_dep_sources} more dependency sources)")
 
-        files = auto_skeleton.get("files", [])
-        if isinstance(files, list) and files:
-            files = self._order_auto_skeleton_files(files, display_paths=display_paths)
         if auto_skeleton.get("enabled") and files:
             if mode == "ranked":
                 lines.extend(["", f"Auto skeleton (Top-{len(files)}, balanced folded, no code body):"])
@@ -837,7 +1076,7 @@ class FileRadarSearchTool:
                     for i, text in enumerate(anchor_items):
                         lines.append(f"    - {text}")
                         if i < len(anchor_names) and anchor_names[i]:
-                            rel = format_call_relations(anchor_names[i], cg, rg)
+                            rel = format_call_relations(anchor_names[i], cg, rg, file_path=item["path"])
                             if rel:
                                 lines.append(f"      {rel}")
                 else:
@@ -851,7 +1090,7 @@ class FileRadarSearchTool:
                     for i, text in enumerate(glimpse_items):
                         lines.append(f"    - {text}")
                         if i < len(glimpse_names) and glimpse_names[i]:
-                            rel = format_call_relations(glimpse_names[i], cg, rg)
+                            rel = format_call_relations(glimpse_names[i], cg, rg, file_path=item["path"])
                             if rel:
                                 lines.append(f"      {rel}")
                 else:
