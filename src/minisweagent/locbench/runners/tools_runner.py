@@ -16,6 +16,7 @@ import threading
 import time
 import traceback
 import uuid
+from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
@@ -23,31 +24,39 @@ import yaml
 from jinja2 import StrictUndefined, Template
 from rich.live import Live
 
-from minisweagent.agents.tool_agent import FormatError, Submitted, ToolAgent, ToolExecutionError, ToolFormatError
-from minisweagent.agents.tool_agent import ExecutionTimeoutError, LimitsExceeded
+from minisweagent.agents.tool_agent import (
+    ExecutionTimeoutError,
+    FormatError,
+    LimitsExceeded,
+    Submitted,
+    ToolAgent,
+    ToolExecutionError,
+    ToolFormatError,
+)
 from minisweagent.config import get_config_path
 from minisweagent.environments import get_environment
 from minisweagent.environments.repo_mounts import build_repo_mount_args
-from minisweagent.models import get_model
-from minisweagent.run.extra.utils.batch_progress import RunBatchProgressManager
-from minisweagent.run.extra.utils.run_summary import write_run_summary
-from minisweagent.run.utils.save import save_traj
 from minisweagent.locbench.config_loader import project_root
 from minisweagent.locbench.utils import (
+    append_jsonl,
     build_answer_stats,
-    compute_locbench_metrics,
+    build_fallback_loc_result,
     build_loc_output,
     build_repo_dir_name,
     build_repo_path,
-    build_fallback_loc_result,
+    compute_locbench_metrics,
     extract_json_payload,
     filter_instances,
     load_existing_instance_ids,
     load_jsonl,
     sanitize_component,
     validate_output_model_name,
-    append_jsonl,
 )
+from minisweagent.models import get_model
+from minisweagent.run.extra.utils.batch_progress import RunBatchProgressManager
+from minisweagent.run.extra.utils.run_summary import write_run_summary
+from minisweagent.run.utils.save import save_traj
+from minisweagent.swe_qa_bench.utils import extract_paths_from_command, extract_paths_from_output
 from minisweagent.tools.code_search import CodeSearchTool
 from minisweagent.tools.file_radar_search import FileRadarSearchTool
 from minisweagent.tools.list_symbols import ListSymbolsTool
@@ -812,6 +821,348 @@ class ProgressTrackingAgent(ToolAgent):
         raise Submitted(submission_payload)
 
 
+class FeedbackProgressTrackingAgent(ProgressTrackingAgent):
+    """ProgressTrackingAgent extension with external feedback-loop guidance."""
+
+    _REPEAT_THRESHOLD = 3
+    _ERROR_STREAK_THRESHOLD = 2
+    _NO_PROGRESS_THRESHOLD = 4
+    _FEEDBACK_REASON_LABELS = {
+        "error_streak": "Command failures are repeating.",
+        "repeat_command": "The same command is repeating without progress.",
+        "no_progress": "No new code evidence is being collected.",
+    }
+
+    def __init__(
+        self,
+        *args,
+        feedback_mode: str = "rule",
+        feedback_every_n_steps: int = 3,
+        feedback_max_rounds: int = 4,
+        feedback_submission_gate: bool = True,
+        repo_path: str | None = None,
+        repo_mount_path: str | None = None,
+        workdir: str | None = None,
+        **kwargs,
+    ):
+        super().__init__(*args, **kwargs)
+        self.feedback_mode = (feedback_mode or "rule").strip().lower()
+        if self.feedback_mode not in {"rule", "hybrid"}:
+            self.feedback_mode = "rule"
+        self.feedback_every_n_steps = max(1, int(feedback_every_n_steps))
+        self.feedback_max_rounds = max(0, int(feedback_max_rounds))
+        self.feedback_submission_gate = bool(feedback_submission_gate)
+
+        self._repo_path: Path | None = None
+        if repo_path:
+            try:
+                self._repo_path = Path(repo_path).resolve()
+            except OSError:
+                self._repo_path = None
+        self._repo_mount_path = str(repo_mount_path or "")
+        self._workdir = str(workdir or "")
+
+        self._action_count = 0
+        self._last_feedback_action_count = -10_000
+        self._feedback_rounds = 0
+        self._blocked_submissions = 0
+        self._feedback_reason_counts: dict[str, int] = defaultdict(int)
+
+        self._failed_streak = 0
+        self._no_new_file_streak = 0
+        self._recent_commands: list[str] = []
+
+        self._observed_read_files: list[str] = []
+        self._observed_read_set: set[str] = set()
+        self._observed_radar_candidates: list[str] = []
+        self._observed_radar_candidate_set: set[str] = set()
+
+    def get_observation(self, response: dict) -> dict:
+        action = self.parse_action(response)
+        output = self.execute_action(action)
+        observation = self.render_template(self.config.action_observation_template, output=output)
+        self.add_message("user", observation)
+        if feedback_message := self._build_feedback_message(action, output):
+            self.add_message("user", feedback_message)
+        return output
+
+    def has_finished(self, output: dict[str, str]):
+        lines = output.get("output", "").lstrip().splitlines(keepends=True)
+        if lines and lines[0].strip() in {"MINI_SWE_AGENT_FINAL_OUTPUT", "COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT"}:
+            submission_payload = "".join(lines[1:])
+            if self.feedback_submission_gate:
+                ok, reason = self._validate_submission_payload(submission_payload)
+                if not ok:
+                    self._blocked_submissions += 1
+                    self._feedback_reason_counts["submission_gate"] += 1
+                    raise FormatError(self._submission_gate_message(reason))
+        super().has_finished(output)
+
+    def get_feedback_stats(self) -> dict[str, Any]:
+        return {
+            "enabled": True,
+            "mode": self.feedback_mode,
+            "feedback_rounds": self._feedback_rounds,
+            "blocked_submissions": self._blocked_submissions,
+            "reason_counts": dict(self._feedback_reason_counts),
+            "observed_read_files": list(self._observed_read_files),
+            "observed_radar_candidates": list(self._observed_radar_candidates),
+        }
+
+    def _build_feedback_message(self, action: dict[str, Any], output: dict[str, Any]) -> str | None:
+        reason = self._update_state_and_pick_reason(action, output)
+        if reason is None:
+            return None
+        if self._feedback_rounds >= self.feedback_max_rounds:
+            return None
+        if self._action_count - self._last_feedback_action_count < self.feedback_every_n_steps:
+            return None
+        self._feedback_rounds += 1
+        self._last_feedback_action_count = self._action_count
+        self._feedback_reason_counts[reason] += 1
+        return self._format_feedback_message(reason)
+
+    def _update_state_and_pick_reason(self, action: dict[str, Any], output: dict[str, Any]) -> str | None:
+        self._action_count += 1
+        command = self._resolve_action_command(action)
+        normalized_command = self._normalize_command(command)
+        if normalized_command:
+            self._recent_commands.append(normalized_command)
+            self._recent_commands = self._recent_commands[-10:]
+
+        returncode = self._coerce_returncode(output.get("returncode", 1))
+        if returncode == 0:
+            self._failed_streak = 0
+        else:
+            self._failed_streak += 1
+
+        action_type = str(action.get("type", "")).strip().lower()
+        added_files = self._ingest_read_evidence(
+            action_type=action_type,
+            command=command,
+            output_text=str(output.get("output", "")),
+            output_data=output.get("data"),
+        )
+        tool_progress = self._ingest_tool_progress(action_type=action_type, command=command, output_data=output.get("data"))
+        if added_files or tool_progress:
+            self._no_new_file_streak = 0
+        else:
+            self._no_new_file_streak += 1
+
+        if self._failed_streak >= self._ERROR_STREAK_THRESHOLD:
+            return "error_streak"
+        if self._has_repeat_pattern():
+            return "repeat_command"
+        if self._no_new_file_streak >= max(self._NO_PROGRESS_THRESHOLD, self.feedback_every_n_steps + 1):
+            return "no_progress"
+        return None
+
+    def _resolve_action_command(self, action: dict[str, Any]) -> str:
+        action_type = str(action.get("type", "")).strip().lower()
+        if action_type == "tool":
+            return str(action.get("raw", "")).strip()
+        return str(action.get("command", action.get("action", ""))).strip()
+
+    def _ingest_read_evidence(
+        self,
+        *,
+        action_type: str,
+        command: str,
+        output_text: str,
+        output_data: Any,
+    ) -> list[str]:
+        self._hydrate_repo_context()
+        if self._repo_path is None:
+            return []
+
+        added: list[str] = []
+        if action_type == "bash":
+            cmd_paths = extract_paths_from_command(command, self._repo_path, self._repo_mount_path, self._workdir)
+            out_paths: list[str] = []
+            if self._command_emits_path_matches(command):
+                out_paths = extract_paths_from_output(output_text, self._repo_path, self._repo_mount_path, self._workdir)
+            for path in cmd_paths + out_paths:
+                if path in self._observed_read_set:
+                    continue
+                self._observed_read_set.add(path)
+                self._observed_read_files.append(path)
+                added.append(path)
+            return added
+
+        if action_type == "tool" and command.startswith("@tool list_symbols") and isinstance(output_data, dict):
+            hint = self._normalize_hint(output_data.get("file"))
+            if hint and hint not in self._observed_read_set:
+                self._observed_read_set.add(hint)
+                self._observed_read_files.append(hint)
+                added.append(hint)
+        return added
+
+    def _ingest_tool_progress(self, *, action_type: str, command: str, output_data: Any) -> int:
+        if action_type != "tool" or not command.startswith("@tool file_radar_search"):
+            return 0
+        if not isinstance(output_data, dict):
+            return 0
+        added = 0
+        for item in output_data.get("results", []):
+            path = self._normalize_hint(item.get("path")) if isinstance(item, dict) else ""
+            if not path or path in self._observed_radar_candidate_set:
+                continue
+            self._observed_radar_candidate_set.add(path)
+            self._observed_radar_candidates.append(path)
+            added += 1
+        return added
+
+    def _hydrate_repo_context(self) -> None:
+        if self._repo_path is None:
+            raw_repo_path = self.extra_template_vars.get("repo_path")
+            if raw_repo_path:
+                try:
+                    self._repo_path = Path(str(raw_repo_path)).resolve()
+                except OSError:
+                    self._repo_path = None
+        if not self._repo_mount_path:
+            self._repo_mount_path = str(self.extra_template_vars.get("repo_mount_path") or "")
+        if not self._workdir:
+            self._workdir = str(self.extra_template_vars.get("workdir") or "")
+
+    def _submission_gate_message(self, reason: str) -> str:
+        observed_preview = self._format_observed_files_preview()
+        return (
+            "SYSTEM_INTERCEPTION: Submission blocked by feedback gate.\n"
+            f"Reason: {reason}\n"
+            "Please inspect the missing target files with bash read commands (rg/sed/cat/head/tail), "
+            "then submit again.\n"
+            f"Observed evidence files:\n{observed_preview}"
+        )
+
+    def _validate_submission_payload(self, text: str) -> tuple[bool, str]:
+        payload, _ = extract_json_payload(text)
+        if payload is None:
+            return False, "Final output is not valid JSON."
+        submission_hints = self._extract_submission_hints(payload)
+        if not submission_hints:
+            return False, "No file_hint/found_files evidence in final payload."
+        if not self._observed_read_set:
+            return False, "No file-read evidence collected before submission."
+        unverified = [hint for hint in submission_hints if not self._hint_is_observed(hint)]
+        if unverified:
+            preview = ", ".join(unverified[:5])
+            return False, f"Unverified file hints: {preview}"
+        return True, ""
+
+    def _extract_submission_hints(self, payload: dict[str, Any]) -> list[str]:
+        hints: list[str] = []
+        raw_functions = payload.get("functions")
+        if isinstance(raw_functions, list):
+            for item in raw_functions:
+                if not isinstance(item, dict):
+                    continue
+                hint = self._normalize_hint(item.get("file_hint", ""))
+                if hint:
+                    hints.append(hint)
+
+        for key in ("found_files", "files"):
+            value = payload.get(key)
+            if isinstance(value, list):
+                for item in value:
+                    hint = self._normalize_hint(item)
+                    if hint:
+                        hints.append(hint)
+
+        for key in ("found_entities", "entities"):
+            value = payload.get(key)
+            if isinstance(value, list):
+                for item in value:
+                    if not isinstance(item, str) or ":" not in item:
+                        continue
+                    hint = self._normalize_hint(item.split(":", 1)[0])
+                    if hint:
+                        hints.append(hint)
+
+        deduped: list[str] = []
+        seen = set()
+        for hint in hints:
+            if hint in seen:
+                continue
+            seen.add(hint)
+            deduped.append(hint)
+        return deduped
+
+    def _hint_is_observed(self, hint: str) -> bool:
+        normalized_hint = self._normalize_hint(hint)
+        hint_name = Path(normalized_hint).name
+        for observed in self._observed_read_set:
+            observed_name = Path(observed).name
+            if normalized_hint == observed:
+                return True
+            if observed.endswith(f"/{normalized_hint}"):
+                return True
+            if hint_name and hint_name == observed_name:
+                return True
+            if normalized_hint and normalized_hint in observed:
+                return True
+        return False
+
+    def _format_feedback_message(self, reason: str) -> str:
+        headline = self._FEEDBACK_REASON_LABELS.get(reason, "Execution is stuck.")
+        observed_preview = self._format_observed_files_preview()
+        return (
+            "SYSTEM_INTERCEPTION: External feedback loop triggered.\n"
+            f"Reason: {headline}\n"
+            "Next step guidance:\n"
+            "- Change strategy and target specific source files.\n"
+            "- Prefer rg to narrow candidates, then use sed/cat for focused reads.\n"
+            "- Avoid repeating failing commands.\n"
+            f"Observed evidence files:\n{observed_preview}"
+        )
+
+    def _format_observed_files_preview(self) -> str:
+        if not self._observed_read_files:
+            return "- <none>"
+        preview = self._observed_read_files[:8]
+        lines = [f"- {item}" for item in preview]
+        if len(self._observed_read_files) > len(preview):
+            lines.append(f"- ... ({len(self._observed_read_files) - len(preview)} more)")
+        return "\n".join(lines)
+
+    def _has_repeat_pattern(self) -> bool:
+        if len(self._recent_commands) < self._REPEAT_THRESHOLD:
+            return False
+        window = self._recent_commands[-self._REPEAT_THRESHOLD :]
+        return len(set(window)) == 1
+
+    @staticmethod
+    def _coerce_returncode(value: Any) -> int:
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return 1
+
+    @staticmethod
+    def _command_emits_path_matches(command: str) -> bool:
+        try:
+            tokens = shlex.split(command)
+        except ValueError:
+            tokens = command.split()
+        return any(token in {"rg", "grep"} for token in tokens)
+
+    @staticmethod
+    def _normalize_command(command: str) -> str:
+        try:
+            return " ".join(shlex.split(command))
+        except ValueError:
+            return command.strip()
+
+    @staticmethod
+    def _normalize_hint(value: Any) -> str:
+        if not isinstance(value, str):
+            return ""
+        cleaned = value.strip().replace("\\", "/")
+        while cleaned.startswith("./"):
+            cleaned = cleaned[2:]
+        return cleaned
+
+
 class ToolsRunner:
     def __init__(
         self,
@@ -845,6 +1196,11 @@ class ToolsRunner:
         tool_backend: str,
         enforce_tool_verification: bool,
         oracle_sniper_mode: bool,
+        feedback_loop: bool,
+        feedback_mode: str,
+        feedback_every_n_steps: int,
+        feedback_max_rounds: int,
+        feedback_submission_gate: bool,
         pricing: dict[str, Any] | None,
         billing: dict[str, Any] | None,
     ) -> None:
@@ -877,6 +1233,11 @@ class ToolsRunner:
         self.tool_backend = tool_backend
         self.enforce_tool_verification = enforce_tool_verification
         self.oracle_sniper_mode = oracle_sniper_mode
+        self.feedback_loop = feedback_loop
+        self.feedback_mode = feedback_mode
+        self.feedback_every_n_steps = feedback_every_n_steps
+        self.feedback_max_rounds = feedback_max_rounds
+        self.feedback_submission_gate = feedback_submission_gate
         self.pricing = pricing
         self.billing = billing
 
@@ -911,6 +1272,11 @@ class ToolsRunner:
             tool_backend=self.tool_backend,
             enforce_tool_verification=self.enforce_tool_verification,
             oracle_sniper_mode=self.oracle_sniper_mode,
+            feedback_loop=self.feedback_loop,
+            feedback_mode=self.feedback_mode,
+            feedback_every_n_steps=self.feedback_every_n_steps,
+            feedback_max_rounds=self.feedback_max_rounds,
+            feedback_submission_gate=self.feedback_submission_gate,
             pricing=self.pricing,
             billing=self.billing,
         )
@@ -1217,6 +1583,11 @@ def _process_instance(
     tool_backend: str,
     enforce_tool_verification: bool,
     oracle_sniper_mode: bool,
+    feedback_loop: bool,
+    feedback_mode: str,
+    feedback_every_n_steps: int,
+    feedback_max_rounds: int,
+    feedback_submission_gate: bool,
     summary_sink: list[dict[str, Any]],
     summary_lock: threading.Lock,
 ) -> None:
@@ -1236,6 +1607,7 @@ def _process_instance(
     exit_status = "Unknown"
     result = ""
     stats: dict[str, Any] | None = None
+    feedback_stats: dict[str, Any] = {}
     worktree_path: Path | None = None
     repo_path = Path(instance["repo_path"])
 
@@ -1256,17 +1628,37 @@ def _process_instance(
 
         env = _get_locbench_environment(config, instance, repo_root)
         progress_manager.update_instance_status(instance_id, "Running agent")
-        agent = ProgressTrackingAgent(
-            model,
-            env,
-            tool_registry=tool_registry,
-            progress_manager=progress_manager,
-            instance_id=instance_id,
-            enforce_tool_verification=enforce_tool_verification,
-            disallow_tools=oracle_sniper_mode,
-            oracle_files=list(instance.get("oracle_files") or []) if oracle_sniper_mode else [],
-            **config.get("agent", {}),
-        )
+        if feedback_loop:
+            agent = FeedbackProgressTrackingAgent(
+                model,
+                env,
+                tool_registry=tool_registry,
+                progress_manager=progress_manager,
+                instance_id=instance_id,
+                enforce_tool_verification=enforce_tool_verification,
+                disallow_tools=oracle_sniper_mode,
+                oracle_files=list(instance.get("oracle_files") or []) if oracle_sniper_mode else [],
+                feedback_mode=feedback_mode,
+                feedback_every_n_steps=feedback_every_n_steps,
+                feedback_max_rounds=feedback_max_rounds,
+                feedback_submission_gate=feedback_submission_gate,
+                repo_path=instance.get("repo_path") or instance.get("repo_source_path"),
+                repo_mount_path=instance.get("repo_mount_path"),
+                workdir=instance.get("workdir"),
+                **config.get("agent", {}),
+            )
+        else:
+            agent = ProgressTrackingAgent(
+                model,
+                env,
+                tool_registry=tool_registry,
+                progress_manager=progress_manager,
+                instance_id=instance_id,
+                enforce_tool_verification=enforce_tool_verification,
+                disallow_tools=oracle_sniper_mode,
+                oracle_files=list(instance.get("oracle_files") or []) if oracle_sniper_mode else [],
+                **config.get("agent", {}),
+            )
         exit_status, result = agent.run(task, **instance)
         if exit_status == "LimitsExceeded":
             fallback_text = _get_last_assistant_content(agent)
@@ -1280,11 +1672,15 @@ def _process_instance(
                 # Keep the extracted fallback result instead of discarding it;
                 # build_loc_output will still produce found_files from it.
         stats = build_answer_stats(model)
+        if agent and hasattr(agent, "get_feedback_stats"):
+            feedback_stats = agent.get_feedback_stats()
     except Exception as exc:
         logger.error("Error processing instance %s: %s", instance_id, exc, exc_info=True)
         exit_status, result = type(exc).__name__, str(exc)
         extra_info = {"traceback": traceback.format_exc()}
         stats = build_answer_stats(model) if model else None
+        if agent and hasattr(agent, "get_feedback_stats"):
+            feedback_stats = agent.get_feedback_stats()
     finally:
         _run_teardown_command(env, config, instance)
         _cleanup_environment(env)
@@ -1366,6 +1762,9 @@ def _process_instance(
         output_record["steps"] = getattr(model, "n_calls", 0) if model else 0
         output_record["trace_tokens"] = billing_stats.get("trace_tokens", billing_stats.get("total_tokens", 0))
         output_record["billed_tokens"] = billing_stats.get("billed_tokens", billing_stats.get("total_tokens", 0))
+        output_record["feedback_loop_enabled"] = bool(feedback_loop)
+        if feedback_stats:
+            output_record["feedback"] = feedback_stats
         if tool_backend == "code_search":
             output_record["code_search_called"] = bool(code_search_called)
             output_record["code_search_tool_calls"] = code_search_called
@@ -1434,6 +1833,9 @@ def _process_instance(
             "cost_usd": billing_stats.get("cost_usd", getattr(model, "cost", 0.0)),
             "correct": metrics.get("correct"),
             "tools_prompt": tools_prompt,
+            "feedback_loop_enabled": bool(feedback_loop),
+            "feedback_rounds": int(feedback_stats.get("feedback_rounds", 0)) if feedback_stats else 0,
+            "feedback_blocked_submissions": int(feedback_stats.get("blocked_submissions", 0)) if feedback_stats else 0,
         }
         if tool_backend == "code_search":
             summary_record["code_search_called"] = bool(code_search_called)
@@ -1487,6 +1889,9 @@ def _process_instance(
         for key, value in metrics.items():
             if key != "correct":
                 summary_record[key] = value
+        if feedback_stats and isinstance(feedback_stats.get("reason_counts"), dict):
+            for reason, count in feedback_stats["reason_counts"].items():
+                summary_record[f"feedback_reason__{reason}"] = count
         with summary_lock:
             summary_sink.append(summary_record)
         progress_manager.on_instance_end(instance_id, exit_status)
@@ -1523,6 +1928,11 @@ def run_tools(
     tool_backend: str,
     enforce_tool_verification: bool,
     oracle_sniper_mode: bool,
+    feedback_loop: bool,
+    feedback_mode: str,
+    feedback_every_n_steps: int,
+    feedback_max_rounds: int,
+    feedback_submission_gate: bool,
     pricing: dict[str, Any] | None,
     billing: dict[str, Any] | None,
 ) -> None:
@@ -1550,6 +1960,9 @@ def run_tools(
         config.setdefault("model", {})["model_class"] = model_class
     if billing is not None:
         config.setdefault("model", {})["billing"] = billing
+    if feedback_mode not in {"rule", "hybrid"}:
+        logger.warning("Invalid feedback_mode '%s'; fallback to rule", feedback_mode)
+        feedback_mode = "rule"
 
     tool_registry = ToolRegistry()
     if oracle_sniper_mode:
@@ -1645,6 +2058,11 @@ def run_tools(
                     tool_backend,
                     enforce_tool_verification,
                     oracle_sniper_mode,
+                    feedback_loop,
+                    feedback_mode,
+                    feedback_every_n_steps,
+                    feedback_max_rounds,
+                    feedback_submission_gate,
                     instance_summaries,
                     summary_lock,
                 ): instance["instance_id"]
@@ -1672,6 +2090,11 @@ def run_tools(
             "tool_backend": tool_backend,
             "enforce_tool_verification": enforce_tool_verification,
             "oracle_sniper_mode": oracle_sniper_mode,
+            "feedback_loop": bool(feedback_loop),
+            "feedback_mode": feedback_mode,
+            "feedback_every_n_steps": int(feedback_every_n_steps),
+            "feedback_max_rounds": int(feedback_max_rounds),
+            "feedback_submission_gate": bool(feedback_submission_gate),
             "agent_config": str(config_path),
             "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
         },

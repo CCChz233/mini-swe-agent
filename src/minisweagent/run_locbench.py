@@ -190,8 +190,7 @@ def _build_overrides(args: argparse.Namespace) -> dict[str, Any]:
     if args.output_model_name:
         overrides["paths"]["output_model_name"] = args.output_model_name
 
-    overrides = {k: v for k, v in overrides.items() if v}
-    return overrides
+    return {k: v for k, v in overrides.items() if v}
 
 
 def _default_method(mode: str, value: str | None) -> str:
@@ -486,6 +485,11 @@ def main(argv: list[str] | None = None) -> None:
             tool_backend="file_radar_search" if mode == "tools_radar" else "code_search",
             enforce_tool_verification=mode == "tools_radar",
             oracle_sniper_mode=oracle_sniper_mode,
+            feedback_loop=feedback_loop,
+            feedback_mode=feedback_mode,
+            feedback_every_n_steps=feedback_every_n_steps,
+            feedback_max_rounds=feedback_max_rounds,
+            feedback_submission_gate=feedback_submission_gate,
             pricing=pricing,
             billing=billing,
         )
