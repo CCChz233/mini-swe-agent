@@ -42,9 +42,20 @@ agent:
     ## Goal
     Identify the most relevant files and entities that should be edited to address the problem.
 
+    ## Localization Workflow (Coverage-First)
+    - Step 1: Categorize the issue into problem description, error trace, repro steps, and additional context.
+    - Step 2: Extract concrete clues (module names, APIs, symbols, line hints) and locate referenced modules.
+    - Step 3: Reconstruct execution flow for this issue (entry points, key calls, upstream/downstream effects).
+    - Step 4: Harvest candidate edit functions from likely target file(s), including sibling methods and direct caller/callee neighbors.
+
     ## Rules
     - Read-only work: do not modify files.
     - Prefer fast search tools like rg and targeted file reads.
+    - Before submitting, inspect enough code to support execution-flow reasoning, not just keyword matches.
+    - If a target file is identified, inspect nearby functions/methods in the same file before submission.
+    - Prefer method-level entities using qualified names when possible (for example `MyClass.handle`).
+    - Do not submit only class names when method-level evidence exists.
+    - If evidence suggests multi-function edits, submit multiple candidates (typically 3-8), ordered by confidence.
     - Do not run tests.
     - File paths must be relative to the repo root (no leading slash).
     - Entity format: "path/to/file.py:entity_name" (function, class, or method).
@@ -54,6 +65,7 @@ agent:
     - functions: list of objects, each with:
       - function: function name (required)
       - file_hint: file name or partial path hint (required unless function is globally unique)
+    - Order functions by confidence and coverage (most likely first).
 
     Submit by running a single command that prints:
     - line 1: MINI_SWE_AGENT_FINAL_OUTPUT

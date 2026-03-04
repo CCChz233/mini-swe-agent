@@ -88,6 +88,12 @@ agent:
     ## Goal
     Identify the most relevant files and entities that should be edited to address the problem.
 
+    ## Localization Workflow (Coverage-First)
+    - Step 1: Categorize the issue into problem description, error trace, repro steps, and additional context.
+    - Step 2: Extract concrete clues (module names, APIs, symbols, line hints) and locate referenced modules.
+    - Step 3: Reconstruct execution flow for this issue (entry points, key calls, upstream/downstream effects).
+    - Step 4: Harvest candidate edit functions from likely target file(s), including sibling methods and direct caller/callee neighbors.
+
     ## Rules
     - Read-only work: do not modify files.
     - Prefer fast search tools like rg and targeted file reads.
@@ -97,6 +103,11 @@ agent:
     - After file_radar_search, you may use list_symbols on candidate files to inspect structure before deep reading.
     - list_symbols does NOT replace bash verification. You still need at least one bash read on a candidate file.
     - If you used file_radar_search and got candidate files, you MUST inspect at least one candidate file via bash before final output.
+    - Harvesting Phase: once a likely target file is identified, use @tool list_symbols and targeted bash reads to collect sibling methods and nearby caller/callee functions before submission.
+    - Prefer method-level entities using qualified names when possible (for example `MyClass.handle`).
+    - Do not submit only class names when method-level evidence exists.
+    - If evidence suggests multi-function edits, submit multiple candidates (typically 3-8), ordered by confidence.
+    - If cross-file dependencies are clearly implicated, include small upstream/downstream function candidates as well.
     - Do not run tests.
     - File paths must be relative to the repo root (no leading slash).
     - Entity format: "path/to/file.py:entity_name" (function, class, or method).
@@ -106,6 +117,7 @@ agent:
     - functions: list of objects, each with:
       - function: function name (required)
       - file_hint: file name or partial path hint (required unless function is globally unique)
+    - Order functions by confidence and coverage (most likely first).
 
     Submit by running a single command that prints:
     - line 1: MINI_SWE_AGENT_FINAL_OUTPUT
