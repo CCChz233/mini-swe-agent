@@ -869,6 +869,73 @@ class FileRadarSearchTool:
         suffix = f", ... (+{len(targets) - len(shown)})" if len(targets) > len(shown) else ""
         return ", ".join(rendered) + suffix
 
+    def _extract_symbol_name_from_preview(self, preview_text: str) -> str:
+        text = str(preview_text or "").strip()
+        if not text:
+            return ""
+        match = re.match(r"^([A-Za-z_][\w\.]*)\((?:function|method|class)\)\[L\d+-L\d+\]", text)
+        if match:
+            return str(match.group(1) or "").strip()
+        prefix = text.split("(", 1)[0].strip()
+        if prefix and re.match(r"^[A-Za-z_][\w\.]*$", prefix):
+            return prefix
+        return ""
+
+    def _build_coverage_candidates(
+        self,
+        *,
+        path: str,
+        skeleton: dict[str, Any],
+        max_candidates: int = 5,
+    ) -> list[str]:
+        names: list[str] = []
+        seen_names: set[str] = set()
+
+        def add_name(name: str) -> None:
+            symbol = str(name or "").strip()
+            if not symbol or symbol in seen_names:
+                return
+            seen_names.add(symbol)
+            names.append(symbol)
+
+        for field in ("anchor_names", "context_glimpse_names"):
+            values = skeleton.get(field, [])
+            if not isinstance(values, list):
+                continue
+            for item in values:
+                add_name(str(item or ""))
+
+        for field in ("anchors_items", "context_glimpse_items"):
+            if len(names) >= max_candidates:
+                break
+            values = skeleton.get(field, [])
+            if not isinstance(values, list):
+                continue
+            for item in values:
+                add_name(self._extract_symbol_name_from_preview(str(item or "")))
+                if len(names) >= max_candidates:
+                    break
+
+        call_graph = skeleton.get("call_graph", {})
+        reverse_graph = skeleton.get("reverse_graph", {})
+        if isinstance(call_graph, dict) and isinstance(reverse_graph, dict):
+            seed_names = [name for name in names if name][:2]
+            for seed_name in seed_names:
+                for callee in call_graph.get(seed_name, [])[:4]:
+                    add_name(str(callee or ""))
+                for caller in reverse_graph.get(seed_name, [])[:4]:
+                    add_name(str(caller or ""))
+                if len(names) >= max_candidates:
+                    break
+
+            if len(names) < max_candidates:
+                for symbol_name in sorted(call_graph.keys()):
+                    add_name(str(symbol_name or ""))
+                    if len(names) >= max_candidates:
+                        break
+
+        return [f"`{build_entity_id(path, symbol_name)}`" for symbol_name in names[:max_candidates]]
+
     def _tree_header(self, *, is_last: bool, text: str) -> str:
         return f"     {'└──' if is_last else '├──'} {text}"
 
@@ -986,6 +1053,21 @@ class FileRadarSearchTool:
                             glimpse_lines.append("-")
                         branches.append(("[GLIMPSE]", glimpse_lines[:8]))
 
+                        coverage_candidates = self._build_coverage_candidates(path=path, skeleton=sk, max_candidates=5)
+                        if coverage_candidates:
+                            branches.append(
+                                (
+                                    "[COVERAGE_CANDIDATES] (Top suspects based on AST & calls)",
+                                    coverage_candidates
+                                    + [
+                                        (
+                                            "Hint: If broader context or multiple edits are likely, "
+                                            f"strictly run `@tool list_symbols --file \"{path}\"` to harvest siblings before submitting."
+                                        )
+                                    ],
+                                )
+                            )
+
                         scope_summary = str(sk.get("scope_summary") or "").strip()
                         if scope_summary:
                             branches.append((f"[SCOPE] {scope_summary}", []))
@@ -1096,6 +1178,15 @@ class FileRadarSearchTool:
                 else:
                     context_glimpse_preview = item.get("context_glimpse_preview", "")
                     lines.append(f"    - {context_glimpse_preview or '-'}")
+                coverage_candidates = self._build_coverage_candidates(path=item["path"], skeleton=item, max_candidates=5)
+                if coverage_candidates:
+                    lines.append("[COVERAGE_CANDIDATES] (Top suspects based on AST & calls)")
+                    for candidate in coverage_candidates:
+                        lines.append(f"    - {candidate}")
+                    lines.append(
+                        "    >> Hint: If broader context or multiple edits are likely, "
+                        f"strictly run `@tool list_symbols --file \"{item['path']}\"` to harvest siblings before submitting."
+                    )
                 scope_summary = str(item.get("scope_summary") or "").strip()
                 if scope_summary:
                     lines.append(f"[SCOPE] {scope_summary}")

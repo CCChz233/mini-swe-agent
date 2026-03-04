@@ -94,6 +94,9 @@ agent:
     - Read-only work: do not modify files.
     - Prefer fast search tools like rg and targeted file reads.
     - Default Map Rule: unless the issue provides an exact, high-confidence target file path, your first action MUST be file_radar_search.
+    - Two-Phase Workflow:
+      Hunting Phase: use file_radar_search to lock high-confidence target files.
+      Harvesting Phase: once a target file is plausible, switch focus to harvesting sibling entities in that file before blind cross-file search.
     - Anti-Laziness Rule: after file_radar_search (with 2+ candidates), you MUST inspect at least 2 candidate files before submitting.
     - Cross-Module Heuristic: when unsure, prefer checking candidates from different directories/modules (soft guidance, not a hard blocker).
     - Clustered Radar Navigation: when results are clustered by directory, first prioritize directories with the most candidate files, then prioritize files that appear as core dependencies in "File Dependencies".
@@ -104,10 +107,12 @@ agent:
     - Rewritten query MUST be materially different from the first query (not a light paraphrase). Prefer concrete symbols, exact error strings, protocol names, business objects, or config keywords.
     - Unless the issue provides an exact, high-confidence target file path and your first radar+read already confirms it, you SHOULD complete at least 2 radar calls before submission.
     - After file_radar_search, you may use list_symbols on candidate files to inspect structure before deep reading.
+    - If radar shows [COVERAGE_CANDIDATES], treat them as seed suspects only (not exhaustive); run list_symbols to harvest additional siblings when multi-edit context is likely.
     - If a target candidate shows many folded symbols (for example [FOLDED] symbols >= 20) or [SCOPE] methods >= 10, you MUST call list_symbols on that file before submitting.
     - list_symbols does NOT replace bash verification. You still need at least one bash read on a candidate file.
     - If you used file_radar_search and got candidate files, you MUST inspect at least one candidate file via bash before final output.
     - High-recall output rule: prefer covering all plausible affected entities in validated target files, not only the top-1 guess.
+    - Harvesting completion rule: before final submission, make a best-effort harvest of related entities in validated target files, then output qualified names.
     - Use qualified names when possible (prefer Class.method over bare method names).
     - Avoid duplicate function+file_hint pairs in final JSON.
     - Do not run tests.
