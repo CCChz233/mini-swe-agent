@@ -120,10 +120,33 @@ def _get_function_index(repo_root: str) -> dict[str, list[dict[str, str]]]:
     return _FUNCTION_INDEX_CACHE[cache_key]
 
 
-def _select_best_match(candidates: list[dict[str, str]], file_hint: str) -> list[dict[str, str]]:
+def _select_best_match(
+    candidates: list[dict[str, str]],
+    file_hint: str,
+    *,
+    max_candidates: int = 3,
+) -> list[dict[str, str]]:
     if not file_hint:
-        return candidates
-    hint = file_hint.lower()
+        return candidates[:max_candidates]
+    hint = file_hint.strip().lower().replace("\\", "/")
+    if hint.startswith("./"):
+        hint = hint[2:]
+    if not hint:
+        return candidates[:max_candidates]
+
+    exact_path_matches = [
+        record
+        for record in candidates
+        if record["file"].lower() == hint or record["file"].lower().endswith(f"/{hint}")
+    ]
+    if len(exact_path_matches) == 1:
+        return exact_path_matches
+
+    hint_basename = Path(hint).name
+    basename_matches = [record for record in candidates if Path(record["file"]).name.lower() == hint_basename]
+    if len(basename_matches) == 1 and ("/" in hint or hint.endswith(".py")):
+        return basename_matches
+
     scored: list[tuple[int, dict[str, str]]] = []
     for record in candidates:
         file_path = record["file"].lower()
@@ -134,7 +157,21 @@ def _select_best_match(candidates: list[dict[str, str]], file_hint: str) -> list
             score = min(_levenshtein(hint, file_path), _levenshtein(hint, basename))
         scored.append((score, record))
     scored.sort(key=lambda item: item[0])
-    return [scored[0][1]] if scored else []
+    if not scored:
+        return []
+
+    best_score = scored[0][0]
+    if best_score == 0:
+        threshold = 0
+    elif best_score <= 2:
+        threshold = best_score + 1
+    else:
+        threshold = best_score
+
+    selected = [record for score, record in scored if score <= threshold]
+    if not selected:
+        selected = [scored[0][1]]
+    return selected[:max_candidates]
 
 
 def map_functions_to_entities(
@@ -160,7 +197,11 @@ def map_functions_to_entities(
             candidates = index.get(leaf, [])
         if candidates:
             if file_hint:
-                selected = _select_best_match(candidates, file_hint)
+                selected = _select_best_match(
+                    candidates,
+                    file_hint,
+                    max_candidates=max(1, min(3, top_k)),
+                )
             elif len(candidates) == 1:
                 selected = candidates
             else:

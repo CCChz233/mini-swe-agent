@@ -89,9 +89,11 @@ agent:
     - Pivot rule: if first search results are weak/ambiguous/conflicting, run a second @tool code_search with rewritten, more concrete query terms.
     - Before submitting, inspect enough code to support execution-flow reasoning, not just keyword matches.
     - If a target file is identified, inspect nearby functions/methods in the same file before submission.
+    - Coverage target: unless you have strong evidence this is a true single-function fix, submit 6-10 function candidates.
+    - If the issue likely stays in one file, include sibling methods/functions from the same file to improve coverage.
     - Prefer method-level entities using qualified names when possible (for example `MyClass.handle`).
     - Do not submit only class names when method-level evidence exists.
-    - If evidence suggests multi-function edits, submit multiple candidates (typically 3-8), ordered by confidence.
+    - Keep candidates evidence-based; avoid random padding.
     - Do not run tests.
     - File paths must be relative to the repo root (no leading slash).
     - Entity format: "path/to/file.py:entity_name" (function, class, or method).
@@ -101,6 +103,7 @@ agent:
     - functions: list of objects, each with:
       - function: function name (required)
       - file_hint: file name or partial path hint (required unless function is globally unique)
+    - Target output size: usually 6-10 functions; if truly high-confidence single-fix, still provide at least 3 tightly related candidates.
     - Order functions by confidence and coverage (most likely first).
 
     Submit by running a single command that prints:
@@ -116,6 +119,7 @@ agent:
 
     Output ONLY the final JSON payload with this key:
     - functions: list of {"function","file_hint"}
+    - Aim for 6-10 candidates when uncertain; if highly confident single-fix, provide at least 3 tightly related candidates.
 
     Submit by running exactly ONE command that prints:
     - line 1: MINI_SWE_AGENT_FINAL_OUTPUT

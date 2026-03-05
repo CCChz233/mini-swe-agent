@@ -68,6 +68,9 @@ agent:
     ## Rules
     - You MUST inspect at least one Oracle file via bash before final output.
     - Final JSON file_hint values should refer to inspected files.
+    - Coverage target: unless you have strong evidence this is a true single-function fix, submit 6-10 function candidates.
+    - If the issue likely stays in one file, include sibling methods/functions from the same file to improve coverage.
+    - Keep candidates evidence-based; avoid random padding.
     - File paths must be relative to the repo root (no leading slash).
     - Entity format: "path/to/file.py:entity_name" (function, class, or method).
 
@@ -76,6 +79,8 @@ agent:
     - functions: list of objects, each with:
       - function: function name (required)
       - file_hint: file name or partial path hint (required unless function is globally unique)
+    - Target output size: usually 6-10 functions; if truly high-confidence single-fix, still provide at least 3 tightly related candidates.
+    - Order functions by confidence and coverage (most likely first).
 
     Submit by running a single command that prints:
     - line 1: MINI_SWE_AGENT_FINAL_OUTPUT
@@ -90,6 +95,7 @@ agent:
 
     Output ONLY the final JSON payload with this key:
     - functions: list of {"function","file_hint"}
+    - Aim for 6-10 candidates when uncertain; if highly confident single-fix, provide at least 3 tightly related candidates.
 
     Submit by running exactly ONE command that prints:
     - line 1: MINI_SWE_AGENT_FINAL_OUTPUT
