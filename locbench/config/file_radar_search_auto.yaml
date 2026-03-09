@@ -29,3 +29,5 @@ auto_skeleton_max_imports_per_file: 0
 auto_skeleton_max_symbols_per_file: 14
 auto_skeleton_include_signature: false
 auto_skeleton_query_aware: true
+radar_output_style: legacy
+coverage_candidates_topn: 4

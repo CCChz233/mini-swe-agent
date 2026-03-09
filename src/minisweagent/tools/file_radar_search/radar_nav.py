@@ -98,6 +98,16 @@ def find_cross_file_deps(repo_root: Path, relevant_files: list[str]) -> dict[str
     return deps
 
 
+def build_reverse_deps(deps: dict[str, list[str]]) -> dict[str, list[str]]:
+    """Reverse import edges: dst -> [src1, src2, ...]."""
+    reverse: dict[str, list[str]] = defaultdict(list)
+    for src, dsts in deps.items():
+        for dst in dsts:
+            if src not in reverse[dst]:
+                reverse[dst].append(src)
+    return {k: sorted(v) for k, v in reverse.items()}
+
+
 def build_focused_tree(relevant_files: list[str]) -> str:
     """Build a minimal directory tree from relevant file paths."""
     dirs: dict[str, list[str]] = defaultdict(list)

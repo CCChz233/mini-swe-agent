@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import re
 import subprocess
 import threading
@@ -16,6 +15,7 @@ from minisweagent.tools.base import ToolResult
 from minisweagent.tools.code_search.chunkers import Chunk, SlidingChunker
 from minisweagent.tools.file_radar_search.radar_nav import (
     build_focused_tree,
+    build_reverse_deps,
     build_reverse_graph,
     extract_call_graph,
     find_cross_file_deps,
@@ -61,7 +61,7 @@ class FileRadarSearchArgs:
     filters: str | None = None
 
     @classmethod
-    def from_raw(cls, raw: dict[str, Any]) -> "FileRadarSearchArgs":
+    def from_raw(cls, raw: dict[str, Any]) -> FileRadarSearchArgs:
         query = raw.get("query")
         if not query or not str(query).strip():
             raise ValueError("query cannot be empty")
@@ -116,9 +116,13 @@ class FileRadarSearchConfig:
     auto_skeleton_max_symbols_per_file: int = 14
     auto_skeleton_include_signature: bool = False
     auto_skeleton_query_aware: bool = True
+    # Output formatter style: legacy | tree_v2
+    radar_output_style: str = "legacy"
+    # Number of [COVERAGE_CANDIDATES] to expose in tree_v2 mode.
+    coverage_candidates_topn: int = 4
 
     @classmethod
-    def from_dict(cls, config: dict[str, Any]) -> "FileRadarSearchConfig":
+    def from_dict(cls, config: dict[str, Any]) -> FileRadarSearchConfig:
         return cls(**config)
 
 
@@ -299,7 +303,11 @@ class FileRadarSearchTool:
             raise ValueError("auto_skeleton_max_imports_per_file must be between 0 and 200")
         if not 0 <= int(self.config.auto_skeleton_max_symbols_per_file) <= 500:
             raise ValueError("auto_skeleton_max_symbols_per_file must be between 0 and 500")
-        self.index_root = Path(os.path.expanduser(self.config.index_root)).resolve()
+        if self.config.radar_output_style not in {"legacy", "tree_v2"}:
+            raise ValueError("radar_output_style must be one of: legacy, tree_v2")
+        if not 3 <= int(self.config.coverage_candidates_topn) <= 5:
+            raise ValueError("coverage_candidates_topn must be between 3 and 5")
+        self.index_root = Path(self.config.index_root).expanduser().resolve()
         self.chunker = SlidingChunker(self.config.chunk_size, self.config.overlap)
         self.embedder = self._build_embedder()
         self.list_symbols_tool = ListSymbolsTool({"max_file_size": self.config.max_file_size})
@@ -365,6 +373,8 @@ class FileRadarSearchTool:
                     "auto_skeleton_budget_chars": int(auto_skeleton.get("budget_chars", 0)),
                     "auto_skeleton_truncated": bool(auto_skeleton.get("truncated", False)),
                     "auto_skeleton_files": auto_skeleton.get("files", []),
+                    "radar_output_style": self.config.radar_output_style,
+                    "coverage_candidates_topn": int(self.config.coverage_candidates_topn),
                 }
                 return ToolResult(success=True, data=data, output=formatted, returncode=0)
         except ValueError:
@@ -427,6 +437,11 @@ class FileRadarSearchTool:
         return ranked
 
     def _format_results(self, query: str, results: list[dict[str, Any]], *, auto_skeleton: dict[str, Any]) -> str:
+        if self.config.radar_output_style == "tree_v2":
+            return self._format_results_tree_v2(query, results, auto_skeleton=auto_skeleton)
+        return self._format_results_legacy(query, results, auto_skeleton=auto_skeleton)
+
+    def _format_results_legacy(self, query: str, results: list[dict[str, Any]], *, auto_skeleton: dict[str, Any]) -> str:
         lines = [f'Found {len(results)} candidate files for "{query}":', ""]
         for idx, item in enumerate(results, start=1):
             lines.append(
@@ -507,6 +522,123 @@ class FileRadarSearchTool:
             )
         return "\n".join(lines).strip()
 
+    def _format_results_tree_v2(self, query: str, results: list[dict[str, Any]], *, auto_skeleton: dict[str, Any]) -> str:
+        if not results:
+            return f'No candidate files found for "{query}".'
+
+        files = auto_skeleton.get("files", [])
+        if not auto_skeleton.get("enabled") or not isinstance(files, list) or not files:
+            return self._format_results_legacy(query, results, auto_skeleton=auto_skeleton)
+
+        file_details: dict[str, dict[str, Any]] = {}
+        for item in files:
+            path = str(item.get("path") or "")
+            if path:
+                file_details[path] = item
+
+        evidence_by_path: dict[str, int] = {}
+        score_by_path: dict[str, float] = {}
+        grouped_paths: dict[str, list[str]] = {}
+        for item in results:
+            path = str(item.get("path") or "").strip()
+            if not path:
+                continue
+            evidence_by_path[path] = int(item.get("evidence_count", 0) or 0)
+            score_by_path[path] = float(item.get("score", 0.0) or 0.0)
+            parent = Path(path).parent.as_posix()
+            dir_label = "./" if parent in {".", ""} else f"{parent}/"
+            grouped_paths.setdefault(dir_label, []).append(path)
+
+        cross_deps = auto_skeleton.get("cross_file_deps", {})
+        reverse_deps = auto_skeleton.get("reverse_cross_file_deps", {})
+        lines: list[str] = []
+
+        def edge_evidence(path: str) -> str:
+            if path in score_by_path:
+                return f"{score_by_path[path]:.2f}"
+            return str(evidence_by_path.get(path, 0))
+
+        for _, (dir_label, paths) in enumerate(grouped_paths.items(), start=1):
+            lines.append(f"[DIR] {dir_label}")
+            for file_idx, path in enumerate(paths, start=1):
+                details = file_details.get(path, {})
+                lines.append(f"  [FILE] {path} (evidence: {evidence_by_path.get(path, 0)})")
+
+                sections: list[dict[str, Any]] = []
+                for dst in sorted(set(cross_deps.get(path, []))):
+                    sections.append(
+                        {
+                            "kind": "edge",
+                            "text": f"imports -> {dst} (evidence: {edge_evidence(dst)})",
+                        }
+                    )
+                for src in sorted(set(reverse_deps.get(path, []))):
+                    sections.append(
+                        {
+                            "kind": "edge",
+                            "text": f"imports-by <- {src} (evidence: {edge_evidence(src)})",
+                        }
+                    )
+
+                anchors_lines: list[str] = []
+                for anchor in details.get("anchors_entities", []):
+                    entity_id = str(anchor.get("entity_id") or "")
+                    preview = str(anchor.get("preview") or "-")
+                    anchors_lines.append(f"`{entity_id}` :: {preview}")
+                    relation = self._format_call_relations_tree(
+                        symbol_name=str(anchor.get("name") or ""),
+                        call_graph=details.get("call_graph", {}),
+                        reverse_graph=details.get("reverse_graph", {}),
+                    )
+                    if relation:
+                        anchors_lines.append(relation)
+                if anchors_lines:
+                    sections.append({"kind": "block", "title": "[ANCHORS]", "items": anchors_lines})
+
+                glimpse_lines = [str(item) for item in details.get("context_glimpse_lines", []) if str(item).strip()]
+                if glimpse_lines:
+                    sections.append({"kind": "block", "title": "[GLIMPSE]", "items": glimpse_lines})
+
+                coverage_candidates = [
+                    str(item) for item in details.get("coverage_candidates", []) if str(item).strip()
+                ]
+                if coverage_candidates:
+                    coverage_title = "[COVERAGE_CANDIDATES] (Top suspects based on AST & calls):"
+                    coverage_items = [f"- `{item}`" for item in coverage_candidates]
+                    coverage_items.append(
+                        ">> Hint: If the issue requires broader context or multiple edits, strictly run "
+                        "`@tool list_symbols` to harvest siblings before submitting."
+                    )
+                    sections.append(
+                        {
+                            "kind": "coverage",
+                            "title": coverage_title,
+                            "items": coverage_items,
+                        }
+                    )
+
+                if not sections:
+                    continue
+
+                for section_idx, section in enumerate(sections):
+                    is_last_section = section_idx == len(sections) - 1
+                    section_prefix = "     └── " if is_last_section else "     ├── "
+                    child_prefix = "         " if is_last_section else "     │   "
+                    kind = section.get("kind")
+                    if kind == "edge":
+                        lines.append(f"{section_prefix}{section['text']}")
+                        continue
+                    lines.append(f"{section_prefix}{section['title']}")
+                    for item in section.get("items", []):
+                        if kind == "coverage":
+                            lines.append(f"{child_prefix}{item}")
+                        else:
+                            lines.append(f"{child_prefix}└── {item}")
+                if file_idx < len(paths):
+                    lines.append("")
+            lines.append("")
+        return "\n".join(lines).strip()
+
     def _build_auto_skeleton(
         self,
         *,
@@ -526,22 +658,22 @@ class FileRadarSearchTool:
             }
 
         selected = results[:topn]
+        any_truncated = len(results) > len(selected)
         if not selected:
             return {
                 "enabled": True,
                 "topn": topn,
                 "budget_chars": budget_chars,
                 "files": [],
-                "truncated": False,
+                "truncated": any_truncated,
             }
 
         query_tokens = self._query_tokens(query) if self.config.auto_skeleton_query_aware else set()
         files: list[dict[str, Any]] = []
-        any_truncated = False
 
         import_limit = max(0, int(self.config.auto_skeleton_max_imports_per_file))
         symbol_limit = max(1, int(self.config.auto_skeleton_max_symbols_per_file))
-        raw_import_limit = min(1000, max(200, import_limit * 10)) if import_limit > 0 else 0
+        raw_import_limit = min(1000, max(200, import_limit * 10)) if import_limit > 0 else 1000
         raw_symbol_limit = min(2000, max(200, symbol_limit * 10))
         anchor_limit = min(2, symbol_limit)
         for idx, candidate in enumerate(selected, start=1):
@@ -564,6 +696,11 @@ class FileRadarSearchTool:
                 "folded_symbols_count": 0,
                 "import_count": 0,
                 "symbol_count": 0,
+                "anchors_entities": [],
+                "context_glimpse_entities": [],
+                "context_glimpse_lines": [],
+                "coverage_candidates": [],
+                "truncated": False,
                 "error": "",
             }
             if not path:
@@ -610,12 +747,21 @@ class FileRadarSearchTool:
                 matched_symbols = []
 
             anchors = matched_symbols[:anchor_limit]
-            anchor_texts = [self._format_symbol_preview(symbol, include_doc=False) for symbol in anchors]
+            anchor_texts: list[str] = []
+            anchor_preview_truncated = False
+            for symbol in anchors:
+                preview_text, preview_truncated = self._format_symbol_preview_with_flag(symbol, include_doc=False)
+                anchor_texts.append(preview_text)
+                anchor_preview_truncated = anchor_preview_truncated or preview_truncated
             base["anchors_preview"] = ", ".join(anchor_texts)
             base["anchors_items"] = anchor_texts
             base["query_hits_preview"] = base["anchors_preview"]
             base["anchor_count"] = len(anchors)
             base["anchor_names"] = [str(s.get("name", "")) for s in anchors]
+            base["anchors_entities"] = [
+                self._build_entity_payload(path=path, symbol=symbol, preview=preview)
+                for symbol, preview in zip(anchors, anchor_texts, strict=False)
+            ]
             if anchors:
                 base["primary_anchor"] = {
                     "name": str(anchors[0].get("name") or ""),
@@ -636,17 +782,51 @@ class FileRadarSearchTool:
                 query_tokens=query_tokens,
                 limit=context_limit,
             )
-            glimpse_texts = [self._format_symbol_preview(symbol, include_doc=True) for symbol in glimpses]
+            glimpse_texts: list[str] = []
+            glimpse_preview_truncated = False
+            for symbol in glimpses:
+                preview_text, preview_truncated = self._format_symbol_preview_with_flag(symbol, include_doc=True)
+                glimpse_texts.append(preview_text)
+                glimpse_preview_truncated = glimpse_preview_truncated or preview_truncated
             base["context_glimpse_preview"] = ", ".join(glimpse_texts)
             base["context_glimpse_items"] = glimpse_texts
             base["context_glimpse_count"] = len(glimpses)
             base["context_glimpse_names"] = [str(s.get("name", "")) for s in glimpses]
+            base["context_glimpse_entities"] = [
+                self._build_entity_payload(path=path, symbol=symbol, preview=preview)
+                for symbol, preview in zip(glimpses, glimpse_texts, strict=False)
+            ]
+            base["context_glimpse_lines"] = [self._format_glimpse_line(symbol) for symbol in glimpses]
+            base["coverage_candidates"] = self._build_coverage_candidates(
+                path=path,
+                anchors=anchors,
+                glimpses=glimpses,
+                symbols=symbols,
+                call_graph=base["call_graph"],
+                reverse_graph=base["reverse_graph"],
+                limit=int(self.config.coverage_candidates_topn),
+            )
             base["folded_imports_count"] = len(imports)
             base["folded_symbols_count"] = max(0, len(symbols) - len(anchors) - len(glimpses))
+            file_truncated = False
+            if base["import_count"] > import_limit:
+                file_truncated = True
+            if base["import_count"] >= raw_import_limit:
+                file_truncated = True
+            if base["symbol_count"] > symbol_limit:
+                file_truncated = True
+            if base["folded_symbols_count"] > 0:
+                file_truncated = True
+            if anchor_preview_truncated or glimpse_preview_truncated:
+                file_truncated = True
+            base["truncated"] = file_truncated
+            if file_truncated:
+                any_truncated = True
             files.append(base)
 
         file_paths = [f["path"] for f in files if f.get("path")]
         cross_file_deps = find_cross_file_deps(repo_root, file_paths) if len(file_paths) > 1 else {}
+        reverse_cross_file_deps = build_reverse_deps(cross_file_deps)
         directory_tree = build_focused_tree(file_paths) if file_paths else ""
 
         return {
@@ -657,6 +837,7 @@ class FileRadarSearchTool:
             "truncated": any_truncated,
             "directory_tree": directory_tree,
             "cross_file_deps": cross_file_deps,
+            "reverse_cross_file_deps": reverse_cross_file_deps,
         }
 
     def _select_context_glimpses(
@@ -774,6 +955,10 @@ class FileRadarSearchTool:
         return any(token in name for token in query_tokens)
 
     def _format_symbol_preview(self, symbol: dict[str, Any], *, include_doc: bool = False) -> str:
+        preview, _ = self._format_symbol_preview_with_flag(symbol, include_doc=include_doc)
+        return preview
+
+    def _format_symbol_preview_with_flag(self, symbol: dict[str, Any], *, include_doc: bool) -> tuple[str, bool]:
         name = self._clean_preview_text(str(symbol.get("name") or ""))
         kind = self._clean_preview_text(str(symbol.get("kind") or "symbol"))
         start = int(symbol.get("start", 0) or 0)
@@ -789,8 +974,107 @@ class FileRadarSearchTool:
                 base = f"{base}: {doc}"
         max_len = 180 if include_doc else 140
         if len(base) > max_len:
-            return base[: max_len - 3] + "..."
-        return base
+            return base[: max_len - 3] + "...", True
+        return base, False
+
+    def _format_glimpse_line(self, symbol: dict[str, Any]) -> str:
+        name = str(symbol.get("name") or "").strip()
+        kind = str(symbol.get("kind") or "symbol").strip().lower()
+        short_name = name.rsplit(".", 1)[-1] if name else "<unknown>"
+        if kind in {"function", "method"}:
+            return f"def {short_name}(...):"
+        if kind == "class":
+            return f"class {short_name}:"
+        return f"{kind} {short_name}"
+
+    def _build_entity_id(self, path: str, symbol_name: str) -> str:
+        clean_path = str(path or "").strip()
+        clean_symbol = str(symbol_name or "").strip()
+        return f"{clean_path}:{clean_symbol}" if clean_path and clean_symbol else clean_path
+
+    def _build_entity_payload(self, *, path: str, symbol: dict[str, Any], preview: str) -> dict[str, Any]:
+        name = str(symbol.get("name") or "")
+        return {
+            "entity_id": self._build_entity_id(path, name),
+            "name": name,
+            "kind": str(symbol.get("kind") or ""),
+            "start": int(symbol.get("start", 0) or 0),
+            "end": int(symbol.get("end", 0) or 0),
+            "preview": str(preview or ""),
+        }
+
+    def _build_coverage_candidates(
+        self,
+        *,
+        path: str,
+        anchors: list[dict[str, Any]],
+        glimpses: list[dict[str, Any]],
+        symbols: list[dict[str, Any]],
+        call_graph: dict[str, list[str]],
+        reverse_graph: dict[str, list[str]],
+        limit: int,
+    ) -> list[str]:
+        local_to_full: dict[str, str] = {}
+        for symbol in symbols:
+            full_name = str(symbol.get("name") or "").strip()
+            if not full_name:
+                continue
+            local_name = full_name.rsplit(".", 1)[-1]
+            if local_name not in local_to_full:
+                local_to_full[local_name] = full_name
+
+        selected: list[str] = []
+        seen: set[str] = set()
+
+        def add_symbol_name(raw_name: str) -> None:
+            raw = str(raw_name or "").strip()
+            if not raw:
+                return
+            resolved = local_to_full.get(raw, raw)
+            entity_id = self._build_entity_id(path, resolved)
+            if not entity_id or entity_id in seen:
+                return
+            seen.add(entity_id)
+            selected.append(entity_id)
+
+        for symbol in anchors:
+            add_symbol_name(str(symbol.get("name") or ""))
+
+        for symbol in anchors:
+            lookup = str(symbol.get("name") or "").rsplit(".", 1)[-1]
+            for callee in call_graph.get(lookup, []):
+                add_symbol_name(callee)
+            for caller in reverse_graph.get(lookup, []):
+                add_symbol_name(caller)
+
+        for symbol in glimpses:
+            add_symbol_name(str(symbol.get("name") or ""))
+
+        if not selected:
+            for symbol in symbols:
+                add_symbol_name(str(symbol.get("name") or ""))
+                if len(selected) >= limit:
+                    break
+        return selected[:limit]
+
+    def _format_call_relations_tree(
+        self,
+        *,
+        symbol_name: str,
+        call_graph: dict[str, list[str]],
+        reverse_graph: dict[str, list[str]],
+    ) -> str:
+        lookup = symbol_name.rsplit(".", 1)[-1] if "." in symbol_name else symbol_name
+        callees = call_graph.get(lookup, [])
+        callers = reverse_graph.get(lookup, [])
+        if not callees and not callers:
+            return ""
+        parts: list[str] = []
+        if callees:
+            parts.append(f"invokes -> {', '.join(callees)}")
+        if callers:
+            parts.append(f"invokes-by <- {', '.join(callers)}")
+        return " | ".join(parts)
 
     def _join_with_budget(self, items: list[str], budget_chars: int) -> tuple[str, int]:
         if budget_chars <= 0 or not items:

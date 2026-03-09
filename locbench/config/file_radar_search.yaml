@@ -29,3 +29,11 @@ auto_skeleton_max_imports_per_file: 0
 auto_skeleton_max_symbols_per_file: 14
 auto_skeleton_include_signature: false
 auto_skeleton_query_aware: true
+
+# Radar 输出样式：
+# - legacy: 现有输出格式
+# - tree_v2: 目录树 + imports/imports-by + anchors/glimpse/coverage candidates
+radar_output_style: legacy
+
+# tree_v2 模式下每个文件展示的 Coverage 候选数（建议 3-5）
+coverage_candidates_topn: 4

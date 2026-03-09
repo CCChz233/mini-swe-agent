@@ -95,20 +95,15 @@ def test_auto_skeleton_top3_compact_output(tmp_path: Path):
     assert "return bool(user)" not in output
 
 
-def test_auto_skeleton_extreme_folding_avoids_truncation_flag(tmp_path: Path):
+def test_auto_skeleton_without_omission_keeps_truncation_false(tmp_path: Path):
     repo = tmp_path / "repo"
     _write_file(
         repo / "src" / "dense.py",
         (
-            "import alpha_module\n"
-            "import beta_module\n"
-            "import gamma_module\n"
-            "import delta_module\n"
-            "import epsilon_module\n\n"
-            "class VeryLongAuthenticationService:\n"
-            "    def build_authentication_payload(self):\n"
+            "class AuthService:\n"
+            "    def build_payload(self):\n"
             "        return 1\n\n"
-            "def compute_authorization_context_for_user_session():\n"
+            "def compute_context():\n"
             "    return 2\n"
         ),
     )
@@ -133,3 +128,162 @@ def test_auto_skeleton_extreme_folding_avoids_truncation_flag(tmp_path: Path):
 
     output = tool._format_results("auth payload context", candidates, auto_skeleton=auto)
     assert "truncated:" not in output
+
+
+def test_tree_v2_output_renders_directory_edges_and_coverage_candidates(tmp_path: Path):
+    repo = tmp_path / "repo"
+    _write_file(
+        repo / "backend" / "chainlit" / "config.py",
+        (
+            "OAUTH_ENABLED = True\n"
+            "CLIENT_ID = 'demo'\n"
+        ),
+    )
+    _write_file(
+        repo / "backend" / "chainlit" / "server.py",
+        (
+            "from backend.chainlit.config import CLIENT_ID\n\n"
+            "def validate_token(token: str) -> bool:\n"
+            "    return token.startswith('x')\n\n"
+            "def oauth_callback(token: str) -> bool:\n"
+            "    return validate_token(token)\n\n"
+            "def init_app() -> None:\n"
+            "    oauth_callback('x')\n"
+        ),
+    )
+
+    tool = _build_tool(
+        tmp_path,
+        auto_skeleton_enabled=True,
+        auto_skeleton_topn=3,
+        auto_skeleton_budget_chars=3500,
+        auto_skeleton_max_imports_per_file=0,
+        auto_skeleton_max_symbols_per_file=14,
+        radar_output_style="tree_v2",
+        coverage_candidates_topn=4,
+    )
+    candidates = [
+        {"path": "backend/chainlit/config.py", "score": 0.91, "evidence_count": 1},
+        {"path": "backend/chainlit/server.py", "score": 0.88, "evidence_count": 35},
+    ]
+    auto = tool._build_auto_skeleton(query="oauth callback auth init", repo_root=repo, results=candidates)
+    assert auto["enabled"] is True
+    assert len(auto["files"]) == 2
+    server_item = next(item for item in auto["files"] if item["path"] == "backend/chainlit/server.py")
+    assert 1 <= len(server_item["coverage_candidates"]) <= 4
+
+    output = tool._format_results("oauth callback auth init", candidates, auto_skeleton=auto)
+    assert "[DIR] backend/chainlit/" in output
+    assert "[FILE] backend/chainlit/config.py (evidence: 1)" in output
+    assert "imports-by <- backend/chainlit/server.py (evidence: 0.88)" in output
+    assert output.count("[ANCHORS]") == 1
+    assert "`backend/chainlit/server.py:oauth_callback` ::" in output
+    assert "invokes -> validate_token | invokes-by <- init_app" in output
+    assert "[COVERAGE_CANDIDATES] (Top suspects based on AST & calls):" in output
+    assert "`backend/chainlit/server.py:oauth_callback`" in output
+    assert "- <none>" not in output
+    assert "└── -" not in output
+    assert "strictly run `@tool list_symbols` to harvest siblings before submitting." in output
+
+
+def test_auto_skeleton_truncation_flag_reflects_symbol_cap(tmp_path: Path):
+    repo = tmp_path / "repo"
+    _write_file(
+        repo / "src" / "service.py",
+        (
+            "def alpha() -> int:\n"
+            "    return 1\n\n"
+            "def beta() -> int:\n"
+            "    return alpha()\n\n"
+            "def gamma() -> int:\n"
+            "    return beta()\n"
+        ),
+    )
+
+    tool = _build_tool(
+        tmp_path,
+        auto_skeleton_enabled=True,
+        auto_skeleton_topn=1,
+        auto_skeleton_budget_chars=3500,
+        auto_skeleton_max_imports_per_file=0,
+        auto_skeleton_max_symbols_per_file=1,
+    )
+    candidates = [{"path": "src/service.py", "score": 0.99, "evidence_count": 7}]
+
+    auto = tool._build_auto_skeleton(query="alpha beta gamma", repo_root=repo, results=candidates)
+    assert auto["truncated"] is True
+    assert len(auto["files"]) == 1
+    assert auto["files"][0]["truncated"] is True
+
+
+def test_auto_skeleton_truncation_flag_reflects_import_cap(tmp_path: Path):
+    repo = tmp_path / "repo"
+    _write_file(
+        repo / "src" / "imports_dense.py",
+        (
+            "import alpha_module\n"
+            "import beta_module\n"
+            "import gamma_module\n\n"
+            "def run() -> int:\n"
+            "    return 1\n"
+        ),
+    )
+    tool = _build_tool(
+        tmp_path,
+        auto_skeleton_enabled=True,
+        auto_skeleton_topn=1,
+        auto_skeleton_budget_chars=3500,
+        auto_skeleton_max_imports_per_file=1,
+        auto_skeleton_max_symbols_per_file=20,
+    )
+    candidates = [{"path": "src/imports_dense.py", "score": 0.55, "evidence_count": 2}]
+    auto = tool._build_auto_skeleton(query="run imports", repo_root=repo, results=candidates)
+    assert auto["truncated"] is True
+    assert auto["files"][0]["truncated"] is True
+
+
+def test_auto_skeleton_truncation_flag_reflects_candidate_omission(tmp_path: Path):
+    repo = tmp_path / "repo"
+    _write_file(repo / "src" / "a.py", "def alpha():\n    return 1\n")
+    _write_file(repo / "src" / "b.py", "def beta():\n    return 1\n")
+    _write_file(repo / "src" / "c.py", "def gamma():\n    return 1\n")
+    tool = _build_tool(
+        tmp_path,
+        auto_skeleton_enabled=True,
+        auto_skeleton_topn=1,
+        auto_skeleton_budget_chars=3500,
+        auto_skeleton_max_imports_per_file=0,
+        auto_skeleton_max_symbols_per_file=20,
+    )
+    candidates = [
+        {"path": "src/a.py", "score": 0.91, "evidence_count": 9},
+        {"path": "src/b.py", "score": 0.88, "evidence_count": 8},
+        {"path": "src/c.py", "score": 0.77, "evidence_count": 7},
+    ]
+    auto = tool._build_auto_skeleton(query="alpha beta gamma", repo_root=repo, results=candidates)
+    assert auto["truncated"] is True
+    assert len(auto["files"]) == 1
+
+
+def test_auto_skeleton_truncation_flag_reflects_preview_string_cutoff(tmp_path: Path):
+    repo = tmp_path / "repo"
+    long_name = "auth_" + ("verylongsegment_" * 12) + "handler"
+    _write_file(
+        repo / "src" / "long_preview.py",
+        (
+            f"def {long_name}() -> int:\n"
+            "    return 1\n"
+        ),
+    )
+    tool = _build_tool(
+        tmp_path,
+        auto_skeleton_enabled=True,
+        auto_skeleton_topn=1,
+        auto_skeleton_budget_chars=3500,
+        auto_skeleton_max_imports_per_file=0,
+        auto_skeleton_max_symbols_per_file=20,
+    )
+    candidates = [{"path": "src/long_preview.py", "score": 0.66, "evidence_count": 3}]
+    auto = tool._build_auto_skeleton(query="auth handler", repo_root=repo, results=candidates)
+    assert auto["truncated"] is True
+    assert auto["files"][0]["truncated"] is True
