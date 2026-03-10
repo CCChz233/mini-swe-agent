@@ -1,0 +1,25 @@
+chunker: sliding
+chunk_size: 800
+overlap: 200
+embedding_provider: local
+embedding_model: "locbench/models/CodeRankEmbed"
+embedding_batch_size: 64
+embedding_max_length: 4096
+embedding_device: cpu
+trust_remote_code: true
+index_root: "swe_qa_bench/indexes"
+max_file_size: 524288
+aggregation: hybrid
+index_validation_mode: static
+index_build_policy: auto
+
+auto_skeleton_enabled: true
+auto_skeleton_topn: 3
+auto_skeleton_budget_chars: 4000
+auto_skeleton_max_imports_per_file: 0
+auto_skeleton_max_symbols_per_file: 14
+auto_skeleton_include_signature: false
+auto_skeleton_query_aware: true
+
+radar_output_style: legacy
+coverage_candidates_topn: 4

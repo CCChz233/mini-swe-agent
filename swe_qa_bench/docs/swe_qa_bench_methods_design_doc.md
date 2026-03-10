@@ -1,15 +1,16 @@
 # SWE-QA-Bench 测评方法设计文档（mini-swe-agent）
 
-本文档说明 mini-swe-agent 在 SWE-QA-Bench 上的两种测评方法及其实现原理，便于迁移后快速理解。
+本文档说明 mini-swe-agent 在 SWE-QA-Bench 上的三种测评方法及其实现原理，便于迁移后快速理解。
 
 ---
 
 ## 1. 方法总览
 
-| 方法 | 入口 | 是否用 LLM | 是否用 Docker | 是否用 code_search |
-|------|------|------------|---------------|--------------------|
-| Bash-only | `python -m minisweagent.run_swe_qa --mode bash` | ✅ | ✅ | ❌ |
-| Tools | `python -m minisweagent.run_swe_qa --mode tools` | ✅ | ✅ | ✅ |
+| 方法 | 入口 | 是否用 LLM | 是否用 Docker | 检索方式 |
+|------|------|------------|---------------|----------|
+| Bash-only | `python -m minisweagent.run_swe_qa --mode bash` | ✅ | ✅ | 无 |
+| Tools | `python -m minisweagent.run_swe_qa --mode tools` | ✅ | ✅ | `code_search` |
+| Tools-Radar | `python -m minisweagent.run_swe_qa --mode tools_radar` | ✅ | ✅ | `file_radar_search` |
 
 ---
 
@@ -75,10 +76,34 @@
 
 ---
 
-## 5. relative_code_list 采集规则
+## 5. 方法三：Tools-Radar（miniswe_tools_radar）
 
-**tools 模式**
-- `tool_candidates`：code_search 返回的路径
+**入口**
+- Runner：`src/minisweagent/swe_qa_bench/runners/tools_runner.py`
+- Prompt：`swe_qa_bench/config/agent_tools_radar_neutral.yaml`
+- 工具配置：`swe_qa_bench/config/file_radar_search.yaml`
+
+**核心组件**
+- `file_radar_search`：文件级语义召回，不返回代码正文
+- `list_symbols`：候选文件骨架浏览
+- `ProgressTrackingToolAgent`：在最终提交前强制进行 bash 验证
+
+**执行流程**
+1. LLM 先用 `file_radar_search` 召回候选文件
+2. 可选用 `list_symbols` 看候选文件骨架
+3. 必须用 bash 读取至少一个候选文件
+4. 输出 `MINI_SWE_AGENT_FINAL_OUTPUT` JSON
+5. 写入 answers JSONL
+
+**约束**
+- 当前只支持 `neutral` prompt
+- `list_symbols` 不能替代 bash 验证
+- 如果调用了 radar 但未读候选文件，提交会被 runner 拦截
+
+## 6. relative_code_list 采集规则
+
+**tools / tools_radar 模式**
+- `tool_candidates`：`code_search` 或 `file_radar_search` 返回的路径
 - `files_read`：实际读过的文件（cat/sed/head/tail/rg 等）
 - `relative_code_list` = 并集（保序去重）
 
@@ -90,15 +115,16 @@
 
 ---
 
-## 6. 输出与日志
+## 7. 输出与日志
 
 - 轨迹/日志：`mini-swe-agent/swe_qa_bench/outputs/<model>/<method>/<timestamp>/`
 - 答案输出：`swe_qa_bench/results/answers/<model>/<method>/<repo>.jsonl`
 
 ---
 
-## 7. 与 LocBench 的关键差异
+## 8. 与 LocBench 的关键差异
 
 - SWE-QA-Bench 不提供 `base_commit`，默认使用仓库 HEAD。
 - 输出格式是 QA 文本，不是 `found_files`/`found_entities`。
 - 评分采用 LLM-as-judge（五维度评分）。
+- `tools_radar` 当前只迁移了 `neutral` 路线，没有迁移 `oracle_sniper`。

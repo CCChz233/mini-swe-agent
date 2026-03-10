@@ -320,7 +320,10 @@ class TrackingToolRegistry(ToolRegistry):
 
     def execute(self, command: str, *, context: dict[str, Any]):
         result = super().execute(command, context=context)
-        if command.startswith("@tool code_search") and result.success:
+        if (
+            command.startswith("@tool code_search")
+            or command.startswith("@tool file_radar_search")
+        ) and result.success:
             for item in result.data.get("results", []):
                 raw_path = item.get("path") or ""
                 rel_path = _normalize_candidate_path(raw_path, self.repo_path, self.repo_mount_path, self.workdir)

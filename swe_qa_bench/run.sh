@@ -2,6 +2,9 @@
 
 PYTHONPATH=src python -m minisweagent.run_swe_qa \
   --mode tools --slice 0:1 --workers 2 --redo-existing
+
+PYTHONPATH=src python -m minisweagent.run_swe_qa \
+  --mode tools_radar --slice 0:1 --workers 2 --redo-existing
   
 PYTHONPATH=src python -m minisweagent.run_swe_qa \
   --mode bash --workers 2 --redo-existing

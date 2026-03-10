@@ -15,19 +15,19 @@ from minisweagent.swe_qa_bench.utils import validate_output_model_name
 from minisweagent.utils.log import logger
 
 
-_ALLOWED_MODES = {"bash", "tools"}
+_ALLOWED_MODES = {"bash", "tools", "tools_radar"}
 _ALLOWED_TOOLS_PROMPTS = {"neutral", "search_first", "search_fallback"}
 
 
-def _parse_args() -> argparse.Namespace:
+def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run SWE-QA-Bench with layered config")
     parser.add_argument("--config-dir", default="", help="Config directory (default: swe_qa_bench/config)")
 
-    parser.add_argument("--mode", choices=sorted(_ALLOWED_MODES), help="Run mode: bash or tools")
+    parser.add_argument("--mode", choices=sorted(_ALLOWED_MODES), help="Run mode: bash, tools, or tools_radar")
     parser.add_argument("--dataset-root", help="Override paths.dataset_root")
     parser.add_argument("--repos-root", help="Override paths.repos_root")
-    parser.add_argument("--indexes-root", help="Override paths.indexes_root (tools only)")
-    parser.add_argument("--model-root", help="Override paths.model_root (tools only)")
+    parser.add_argument("--indexes-root", help="Override paths.indexes_root (tools/tools_radar only)")
+    parser.add_argument("--model-root", help="Override paths.model_root (tools/tools_radar only)")
     parser.add_argument("--output-model-name", help="Override paths.output_model_name")
     parser.add_argument("--output-dir", help="Override run.output_dir")
     parser.add_argument("--run-id", help="Run identifier (default: timestamp)")
@@ -49,10 +49,10 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--tools-prompt",
         choices=sorted(_ALLOWED_TOOLS_PROMPTS),
-        help="Tools prompt variant (tools mode only)",
+        help="Tools prompt variant (tools mode; tools_radar only supports neutral)",
     )
 
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def _normalize_optional(value: Any) -> str | None:
@@ -152,6 +152,8 @@ def _normalize_repos(value: Any) -> list[str]:
 def _default_method(mode: str, value: str | None) -> str:
     if value:
         return value
+    if mode == "tools_radar":
+        return "miniswe_tools_radar"
     return "miniswe_tools" if mode == "tools" else "miniswe_bash"
 
 
@@ -209,8 +211,8 @@ def _log_summary(config: dict[str, Any], *, mode: str, agent_config: Path, tool_
         logger.info("  %s: %s", key, value)
 
 
-def main() -> None:
-    args = _parse_args()
+def main(argv: list[str] | None = None) -> None:
+    args = _parse_args(argv)
     config_dir = Path(args.config_dir).expanduser().resolve() if args.config_dir else None
 
     config = load_config(config_dir=config_dir, overrides=_build_overrides(args))
@@ -264,10 +266,14 @@ def main() -> None:
     tools_prompt = _normalize_tools_prompt(run_cfg.get("tools_prompt"))
     if mode == "tools" and tools_prompt not in _ALLOWED_TOOLS_PROMPTS:
         raise ValueError(f"Invalid tools_prompt: {tools_prompt}")
+    if mode == "tools_radar" and tools_prompt != "neutral":
+        raise ValueError("tools_radar only supports tools_prompt=neutral")
 
     root = project_root()
     if mode == "tools":
         default_agent = root / "swe_qa_bench" / "config" / f"agent_tools_{tools_prompt}.yaml"
+    elif mode == "tools_radar":
+        default_agent = root / "swe_qa_bench" / "config" / "agent_tools_radar_neutral.yaml"
     else:
         default_agent = root / "swe_qa_bench" / "config" / "agent_bash.yaml"
 
@@ -282,13 +288,17 @@ def main() -> None:
         raise ValueError(f"Agent config not found: {agent_config}")
 
     tool_config = None
-    if mode == "tools":
-        default_tool = root / "swe_qa_bench" / "config" / "code_search.yaml"
+    if mode in {"tools", "tools_radar"}:
+        default_tool = (
+            root / "swe_qa_bench" / "config" / "file_radar_search.yaml"
+            if mode == "tools_radar"
+            else root / "swe_qa_bench" / "config" / "code_search.yaml"
+        )
         tool_config = Path(str(run_cfg.get("tool_config") or default_tool)).expanduser().resolve()
         if not tool_config.exists():
             raise ValueError(f"Tool config not found: {tool_config}")
         if not indexes_root or not model_root:
-            raise ValueError("paths.indexes_root and paths.model_root must be set for tools mode")
+            raise ValueError("paths.indexes_root and paths.model_root must be set for tools/tools_radar mode")
         indexes_root = str(_resolve_path(indexes_root, "paths.indexes_root"))
         model_root = str(_resolve_path(model_root, "paths.model_root"))
 
@@ -350,6 +360,8 @@ def main() -> None:
         indexes_root=indexes_root,
         model_root=model_root,
         tools_prompt=tools_prompt,
+        tool_backend="file_radar_search" if mode == "tools_radar" else "code_search",
+        enforce_tool_verification=mode == "tools_radar",
         pricing=pricing,
         billing=billing,
     )

@@ -46,11 +46,16 @@ def _default_agent_config(mode: str) -> Path:
     base = package_dir.parents[1] / "swe_qa_bench" / "config"
     if mode == "tools":
         return base / "agent_tools.yaml"
+    if mode == "tools_radar":
+        return base / "agent_tools_radar_neutral.yaml"
     return base / "agent_bash.yaml"
 
 
-def _default_tool_config() -> Path:
-    return package_dir.parents[1] / "swe_qa_bench" / "config" / "code_search.yaml"
+def _default_tool_config(mode: str) -> Path:
+    base = package_dir.parents[1] / "swe_qa_bench" / "config"
+    if mode == "tools_radar":
+        return base / "file_radar_search.yaml"
+    return base / "code_search.yaml"
 
 
 def _resolve_path(value: Any) -> Path:
@@ -59,9 +64,17 @@ def _resolve_path(value: Any) -> Path:
     return Path(os.path.expandvars(os.path.expanduser(str(value))))
 
 
+def _resolve_optional_path(value: Any) -> str | None:
+    if not value or not str(value).strip():
+        return None
+    return str(_resolve_path(value))
+
+
 def _get_method(mode: str, value: Any) -> str:
     if value:
         return str(value)
+    if mode == "tools_radar":
+        return "miniswe_tools_radar"
     return "miniswe_tools" if mode == "tools" else "miniswe_bash"
 
 
@@ -104,8 +117,8 @@ def main() -> None:
     config = _load_config(config_path)
 
     mode = str(config.get("mode", "")).strip().lower()
-    if mode not in {"bash", "tools"}:
-        raise ValueError("mode must be 'bash' or 'tools'")
+    if mode not in {"bash", "tools", "tools_radar"}:
+        raise ValueError("mode must be 'bash', 'tools', or 'tools_radar'")
 
     _apply_env(config.get("env"))
 
@@ -129,6 +142,8 @@ def main() -> None:
     tools_prompt = _normalize_tools_prompt(config.get("tools_prompt"))
     if mode == "tools" and tools_prompt not in _ALLOWED_TOOLS_PROMPTS:
         raise ValueError(f"Invalid tools_prompt: {tools_prompt}")
+    if mode == "tools_radar" and tools_prompt != "neutral":
+        raise ValueError("tools_radar only supports tools_prompt=neutral")
 
     resume = bool(config.get("resume", False))
     run_id = _normalize_run_id(config.get("run_id"))
@@ -185,8 +200,10 @@ def main() -> None:
         runner.run()
         return
 
-    tool_config = config.get("tool_config") or _default_tool_config()
+    tool_config = config.get("tool_config") or _default_tool_config(mode)
     tool_config_path = Path(tool_config).expanduser().resolve()
+    indexes_root = _resolve_optional_path(config.get("indexes_root"))
+    model_root = _resolve_optional_path(config.get("model_root"))
     runner = tools_runner.ToolsRunner(
         dataset_root=dataset_root,
         repos_root=repos_root,
@@ -207,9 +224,11 @@ def main() -> None:
         run_id=run_id,
         output_dir=output_dir,
         redo_existing=redo_existing,
-        indexes_root=None,
-        model_root=None,
+        indexes_root=indexes_root,
+        model_root=model_root,
         tools_prompt=tools_prompt,
+        tool_backend="file_radar_search" if mode == "tools_radar" else "code_search",
+        enforce_tool_verification=mode == "tools_radar",
         pricing=pricing,
         billing=billing,
     )

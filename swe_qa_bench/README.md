@@ -50,6 +50,16 @@ PYTHONPATH=src python -m minisweagent.run_swe_qa \
 ```
 说明：首次 tools 运行会为该 repo 自动构建索引（只建当前 repo，不会全量建）。
 
+### C) Tools-Radar（bash + file_radar_search）
+```bash
+PYTHONPATH=src python -m minisweagent.run_swe_qa \
+  --mode tools_radar --repos requests --workers 1 \
+  --run-id 20260131_120000
+```
+说明：
+- `tools_radar` 只支持 `neutral` prompt，不支持 `search_first` / `search_fallback`。
+- 调用 `file_radar_search` 后，提交最终答案前必须先用 bash 读取至少一个候选文件。
+
 ### E) Resume（断点续跑）
 ```bash
 PYTHONPATH=src python -m minisweagent.run_swe_qa \
