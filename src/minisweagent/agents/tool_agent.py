@@ -108,6 +108,16 @@ class ToolAgent:
     def step(self) -> dict:
         return self.get_observation(self.query())
 
+    _CONTENT_FILTER_MAX_RETRIES = 2
+
+    def _is_content_filtered(self, response: dict) -> bool:
+        extra = response.get("extra", {})
+        resp = extra.get("response", {})
+        for choice in resp.get("choices", []):
+            if choice.get("finish_reason") == "content_filter":
+                return True
+        return False
+
     def query(self) -> dict:
         if (
             self.config.step_limit > 0
@@ -120,6 +130,13 @@ class ToolAgent:
         if 0 < self.config.step_limit <= self.model.n_calls or 0 < self.config.cost_limit <= self.model.cost:
             raise LimitsExceeded()
         response = self.model.query(self.messages)
+        content = response.get("content", "") or ""
+        if not content.strip() and self._is_content_filtered(response):
+            for _ in range(self._CONTENT_FILTER_MAX_RETRIES):
+                response = self.model.query(self.messages)
+                content = response.get("content", "") or ""
+                if content.strip() or not self._is_content_filtered(response):
+                    break
         self.add_message("assistant", **response)
         return response
 

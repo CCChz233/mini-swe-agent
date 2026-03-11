@@ -68,8 +68,8 @@ def _parse_bool(value: Any, *, name: str, default: bool) -> bool:
 class ListSymbolsArgs:
     file: str
     include_signature: bool = False
-    max_symbols: int = 500
-    max_imports: int = 200
+    max_symbols: int = 50
+    max_imports: int = 30
 
     @classmethod
     def from_raw(cls, raw: dict[str, Any]) -> "ListSymbolsArgs":

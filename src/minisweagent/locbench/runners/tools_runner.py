@@ -217,6 +217,7 @@ class ProgressTrackingAgent(ToolAgent):
         top1 = self.radar_top1_file or "<none>"
         non_top1_candidates = self.radar_top2_to5_files[:4]
         lines = "\n".join(f"- {path}" for path in non_top1_candidates) if non_top1_candidates else "- <none>"
+        first_candidate = non_top1_candidates[0] if non_top1_candidates else "path/to/file.py"
         base = (
             "SYSTEM_INTERCEPTION: Rank Cross-Check Required.\n"
             "This is not a JSON formatting error.\n"
@@ -224,7 +225,8 @@ class ProgressTrackingAgent(ToolAgent):
             f"Top-1 candidate: {top1}\n"
             "Candidate files from ranks 2-5:\n"
             f"{lines}\n"
-            "Inspect one of them via bash read or @tool list_symbols, then submit again."
+            "Use a targeted bash read (e.g. `sed -n '1,80p' " + first_candidate + "` or `rg 'symbol' " + first_candidate + "`). "
+            "Avoid list_symbols on large files to save context budget, then submit again."
         )
         if self._strict_recovery_mode:
             return self._strict_recovery_message(base)

@@ -5,7 +5,7 @@ embedding_provider: local
 embedding_model: "locbench/models/CodeRankEmbed"
 embedding_batch_size: 64
 embedding_max_length: 4096
-embedding_device: cpu
+embedding_device: cuda:0
 trust_remote_code: true
 index_root: "swe_qa_bench/indexes"
 max_file_size: 524288
