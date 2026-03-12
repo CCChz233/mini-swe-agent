@@ -1,0 +1,5 @@
+instance_id,exit_status,steps,trace_tokens,billed_tokens,cost_usd,correct,blocked_submission_count,list_symbols_called,radar_called,radar_tool_calls,radar_tool_output_chars,radar_verification_satisfied,tools_prompt
+requests-2,Submitted,3,3599,3599,0.0,,0,0,False,0,0,,neutral
+requests-1,Submitted,6,13406,13406,0.0,,1,0,True,1,2270,True,neutral
+requests-0,Submitted,6,11780,11780,0.0,,0,0,True,1,2267,True,neutral
+requests-3,Submitted,8,23165,23165,0.0,,1,0,True,1,2337,True,neutral

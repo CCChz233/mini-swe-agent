@@ -1,0 +1,14 @@
+model,setting,family,method_label,method_raw,run_id,record_count,setting_role,selection_rule,benchmark_scope,notes
+GPT-OSS-120B,Bash,bash,miniswe_bash,miniswe_bash,20260305_122240,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper setting.
+GPT-OSS-120B,Snippet Search,tools,miniswe_tools,miniswe_tools,20260305_125922,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper setting.
+GPT-OSS-120B,CodeNav,codenav,codenav_tree,radar_tree,20260309_212351,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper final tree navigation setting.
+Qwen2.5-72B-Instruct-GPTQ-Int4,Bash,bash,miniswe_bash,miniswe_bash,20260305_185720,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper setting.
+Qwen2.5-72B-Instruct-GPTQ-Int4,Snippet Search,tools,miniswe_tools,miniswe_tools,20260305_201631,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper setting.
+Qwen2.5-72B-Instruct-GPTQ-Int4,CodeNav,codenav,miniswe_tools_codenav,miniswe_tools_radar,20260305_150343,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper final tree navigation setting.
+Qwen3-Coder-30B-A3B-Instruct,Bash,bash,miniswe_bash,miniswe_bash,20260306_025513,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper setting.
+Qwen3-Coder-30B-A3B-Instruct,Snippet Search,tools,miniswe_tools,miniswe_tools,20260306_043958,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper setting.
+Qwen3-Coder-30B-A3B-Instruct,CodeNav,codenav,miniswe_tools_codenav,miniswe_tools_radar,20260306_000149,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper final tree navigation setting.
+gemini-3-flash-preview,Bash,bash,miniswe_bash,miniswe_bash,20260311_030304,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper setting.
+gemini-3-flash-preview,Snippet Search,tools,miniswe_tools,miniswe_tools,20260311_050240,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper setting.
+gemini-3-flash-preview,CodeNav,codenav,miniswe_tools_codenav,miniswe_tools_codenav,20260310_235113,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper final tree navigation setting.
+qwen3.5-plus,Bash,bash,miniswe_bash,miniswe_bash,20260223_225913,560,main,latest officially evaluable full run for this model x setting,LocBench V1 full benchmark,Main-paper setting.

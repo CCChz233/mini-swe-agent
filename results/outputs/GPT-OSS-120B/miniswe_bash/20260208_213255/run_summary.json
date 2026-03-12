@@ -1,0 +1,6511 @@
+{
+  "meta": {
+    "benchmark": "swe_qa_bench",
+    "model": "openai/GPT-OSS-120B",
+    "model_class": "litellm",
+    "method": "miniswe_bash",
+    "run_id": "20260208_213255",
+    "timestamp": "2026-02-08T23:20:17"
+  },
+  "stats_overall": {
+    "total_instances": 720,
+    "success_count": 716,
+    "pass_rate": null,
+    "avg_steps": 11.133333333333333,
+    "p50_steps": 5,
+    "p90_steps": 31,
+    "avg_trace_tokens": 43104.49444444444,
+    "p50_trace_tokens": 9917,
+    "p90_trace_tokens": 129298,
+    "avg_billed_tokens": 43124.97222222222,
+    "p50_billed_tokens": 9917,
+    "p90_billed_tokens": 129298,
+    "total_cost": 0.0
+  },
+  "stats_by_exit_status": {
+    "Submitted": 716,
+    "OSError": 4
+  },
+  "instances": [
+    {
+      "instance_id": "astropy-0",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2490,
+      "billed_tokens": 2490,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-2",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 13456,
+      "billed_tokens": 13456,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-4",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 4563,
+      "billed_tokens": 4563,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-5",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4031,
+      "billed_tokens": 4031,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-6",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7355,
+      "billed_tokens": 7355,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-1",
+      "exit_status": "Submitted",
+      "steps": 35,
+      "trace_tokens": 108960,
+      "billed_tokens": 108960,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-8",
+      "exit_status": "Submitted",
+      "steps": 29,
+      "trace_tokens": 317242,
+      "billed_tokens": 317242,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-3",
+      "exit_status": "Submitted",
+      "steps": 45,
+      "trace_tokens": 250485,
+      "billed_tokens": 250485,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-11",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 4761,
+      "billed_tokens": 4761,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-7",
+      "exit_status": "Submitted",
+      "steps": 45,
+      "trace_tokens": 214993,
+      "billed_tokens": 214993,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-12",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6818,
+      "billed_tokens": 6818,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-13",
+      "exit_status": "Submitted",
+      "steps": 17,
+      "trace_tokens": 29400,
+      "billed_tokens": 29400,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-9",
+      "exit_status": "Submitted",
+      "steps": 48,
+      "trace_tokens": 217095,
+      "billed_tokens": 217095,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-10",
+      "exit_status": "Submitted",
+      "steps": 34,
+      "trace_tokens": 170850,
+      "billed_tokens": 170850,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-17",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 14445,
+      "billed_tokens": 14445,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-16",
+      "exit_status": "Submitted",
+      "steps": 28,
+      "trace_tokens": 152230,
+      "billed_tokens": 152230,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-14",
+      "exit_status": "Submitted",
+      "steps": 53,
+      "trace_tokens": 240329,
+      "billed_tokens": 240329,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-18",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 4411,
+      "billed_tokens": 4411,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-15",
+      "exit_status": "Submitted",
+      "steps": 46,
+      "trace_tokens": 170150,
+      "billed_tokens": 170150,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-21",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2023,
+      "billed_tokens": 2023,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-22",
+      "exit_status": "Submitted",
+      "steps": 13,
+      "trace_tokens": 31666,
+      "billed_tokens": 31666,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-20",
+      "exit_status": "Submitted",
+      "steps": 21,
+      "trace_tokens": 36432,
+      "billed_tokens": 36432,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-23",
+      "exit_status": "Submitted",
+      "steps": 23,
+      "trace_tokens": 43059,
+      "billed_tokens": 43059,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-26",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3325,
+      "billed_tokens": 3325,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-24",
+      "exit_status": "Submitted",
+      "steps": 19,
+      "trace_tokens": 47826,
+      "billed_tokens": 47826,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-27",
+      "exit_status": "Submitted",
+      "steps": 11,
+      "trace_tokens": 23638,
+      "billed_tokens": 23638,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-29",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 4320,
+      "billed_tokens": 4320,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-30",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 648,
+      "billed_tokens": 648,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-31",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 625,
+      "billed_tokens": 625,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-25",
+      "exit_status": "Submitted",
+      "steps": 29,
+      "trace_tokens": 77419,
+      "billed_tokens": 77419,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-32",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 670,
+      "billed_tokens": 670,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-33",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2275,
+      "billed_tokens": 2275,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-28",
+      "exit_status": "Submitted",
+      "steps": 29,
+      "trace_tokens": 137717,
+      "billed_tokens": 137717,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-35",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 701,
+      "billed_tokens": 701,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-34",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 7440,
+      "billed_tokens": 7440,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-19",
+      "exit_status": "Submitted",
+      "steps": 59,
+      "trace_tokens": 244822,
+      "billed_tokens": 244822,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-37",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 8573,
+      "billed_tokens": 8573,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-38",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 27259,
+      "billed_tokens": 27259,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-40",
+      "exit_status": "OSError",
+      "steps": 3,
+      "trace_tokens": 7839,
+      "billed_tokens": 7839,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-36",
+      "exit_status": "Submitted",
+      "steps": 39,
+      "trace_tokens": 201124,
+      "billed_tokens": 201124,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-39",
+      "exit_status": "Submitted",
+      "steps": 43,
+      "trace_tokens": 232324,
+      "billed_tokens": 232324,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-41",
+      "exit_status": "Submitted",
+      "steps": 18,
+      "trace_tokens": 38248,
+      "billed_tokens": 38248,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-44",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 7176,
+      "billed_tokens": 7176,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-43",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 8401,
+      "billed_tokens": 8401,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-47",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 9360,
+      "billed_tokens": 9360,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-42",
+      "exit_status": "Submitted",
+      "steps": 47,
+      "trace_tokens": 160572,
+      "billed_tokens": 160572,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-46",
+      "exit_status": "Submitted",
+      "steps": 16,
+      "trace_tokens": 30498,
+      "billed_tokens": 30498,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-0",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 7942,
+      "billed_tokens": 7942,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "astropy-45",
+      "exit_status": "Submitted",
+      "steps": 28,
+      "trace_tokens": 113863,
+      "billed_tokens": 113863,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-3",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2886,
+      "billed_tokens": 2886,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-4",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2227,
+      "billed_tokens": 2227,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-2",
+      "exit_status": "Submitted",
+      "steps": 21,
+      "trace_tokens": 69553,
+      "billed_tokens": 69553,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-6",
+      "exit_status": "Submitted",
+      "steps": 15,
+      "trace_tokens": 29404,
+      "billed_tokens": 29404,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-1",
+      "exit_status": "Submitted",
+      "steps": 35,
+      "trace_tokens": 154913,
+      "billed_tokens": 154913,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-9",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2597,
+      "billed_tokens": 2597,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-10",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 10028,
+      "billed_tokens": 10028,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-7",
+      "exit_status": "Submitted",
+      "steps": 40,
+      "trace_tokens": 175708,
+      "billed_tokens": 175708,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-8",
+      "exit_status": "Submitted",
+      "steps": 54,
+      "trace_tokens": 260181,
+      "billed_tokens": 260181,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-12",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 3931,
+      "billed_tokens": 3931,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-11",
+      "exit_status": "Submitted",
+      "steps": 33,
+      "trace_tokens": 162988,
+      "billed_tokens": 162988,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-5",
+      "exit_status": "Submitted",
+      "steps": 57,
+      "trace_tokens": 279583,
+      "billed_tokens": 279583,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-14",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7579,
+      "billed_tokens": 7579,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-16",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5188,
+      "billed_tokens": 5188,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-13",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 42286,
+      "billed_tokens": 42286,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-17",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7297,
+      "billed_tokens": 7297,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-20",
+      "exit_status": "Submitted",
+      "steps": 31,
+      "trace_tokens": 153995,
+      "billed_tokens": 153995,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-15",
+      "exit_status": "Submitted",
+      "steps": 52,
+      "trace_tokens": 296612,
+      "billed_tokens": 296612,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-21",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5629,
+      "billed_tokens": 5629,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-19",
+      "exit_status": "Submitted",
+      "steps": 37,
+      "trace_tokens": 179484,
+      "billed_tokens": 179484,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-22",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 22132,
+      "billed_tokens": 22132,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-18",
+      "exit_status": "Submitted",
+      "steps": 39,
+      "trace_tokens": 281489,
+      "billed_tokens": 281489,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-24",
+      "exit_status": "Submitted",
+      "steps": 21,
+      "trace_tokens": 67439,
+      "billed_tokens": 67439,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-27",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5336,
+      "billed_tokens": 5336,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-26",
+      "exit_status": "Submitted",
+      "steps": 30,
+      "trace_tokens": 138329,
+      "billed_tokens": 138329,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-25",
+      "exit_status": "Submitted",
+      "steps": 29,
+      "trace_tokens": 146101,
+      "billed_tokens": 146101,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-28",
+      "exit_status": "Submitted",
+      "steps": 17,
+      "trace_tokens": 54750,
+      "billed_tokens": 54750,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-23",
+      "exit_status": "Submitted",
+      "steps": 56,
+      "trace_tokens": 434351,
+      "billed_tokens": 434351,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-29",
+      "exit_status": "Submitted",
+      "steps": 21,
+      "trace_tokens": 78172,
+      "billed_tokens": 78172,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-32",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5010,
+      "billed_tokens": 5010,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-31",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 5914,
+      "billed_tokens": 5914,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-34",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7718,
+      "billed_tokens": 7718,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-30",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 26824,
+      "billed_tokens": 26824,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-33",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 10866,
+      "billed_tokens": 10866,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-36",
+      "exit_status": "Submitted",
+      "steps": 15,
+      "trace_tokens": 55361,
+      "billed_tokens": 55361,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-35",
+      "exit_status": "Submitted",
+      "steps": 30,
+      "trace_tokens": 142416,
+      "billed_tokens": 142416,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-40",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 4674,
+      "billed_tokens": 4674,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-41",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1535,
+      "billed_tokens": 1535,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-38",
+      "exit_status": "Submitted",
+      "steps": 44,
+      "trace_tokens": 168255,
+      "billed_tokens": 168255,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-42",
+      "exit_status": "Submitted",
+      "steps": 23,
+      "trace_tokens": 129992,
+      "billed_tokens": 129992,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-37",
+      "exit_status": "Submitted",
+      "steps": 65,
+      "trace_tokens": 354821,
+      "billed_tokens": 354821,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-39",
+      "exit_status": "Submitted",
+      "steps": 41,
+      "trace_tokens": 358624,
+      "billed_tokens": 358624,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-45",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3394,
+      "billed_tokens": 3394,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-43",
+      "exit_status": "Submitted",
+      "steps": 16,
+      "trace_tokens": 69560,
+      "billed_tokens": 69560,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-0",
+      "exit_status": "Submitted",
+      "steps": 16,
+      "trace_tokens": 23329,
+      "billed_tokens": 23329,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-44",
+      "exit_status": "Submitted",
+      "steps": 36,
+      "trace_tokens": 152493,
+      "billed_tokens": 152493,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-47",
+      "exit_status": "Submitted",
+      "steps": 43,
+      "trace_tokens": 272225,
+      "billed_tokens": 272225,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-1",
+      "exit_status": "Submitted",
+      "steps": 40,
+      "trace_tokens": 164477,
+      "billed_tokens": 164477,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-3",
+      "exit_status": "Submitted",
+      "steps": 25,
+      "trace_tokens": 68482,
+      "billed_tokens": 68482,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-5",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2653,
+      "billed_tokens": 2653,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-2",
+      "exit_status": "Submitted",
+      "steps": 36,
+      "trace_tokens": 192433,
+      "billed_tokens": 192433,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-6",
+      "exit_status": "Submitted",
+      "steps": 29,
+      "trace_tokens": 80721,
+      "billed_tokens": 80721,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "conan-46",
+      "exit_status": "Submitted",
+      "steps": 81,
+      "trace_tokens": 736662,
+      "billed_tokens": 736662,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-7",
+      "exit_status": "Submitted",
+      "steps": 27,
+      "trace_tokens": 53547,
+      "billed_tokens": 53547,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-4",
+      "exit_status": "Submitted",
+      "steps": 48,
+      "trace_tokens": 245337,
+      "billed_tokens": 245337,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-11",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1819,
+      "billed_tokens": 1819,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-12",
+      "exit_status": "OSError",
+      "steps": 6,
+      "trace_tokens": 9191,
+      "billed_tokens": 9191,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-9",
+      "exit_status": "Submitted",
+      "steps": 23,
+      "trace_tokens": 66943,
+      "billed_tokens": 66943,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-10",
+      "exit_status": "Submitted",
+      "steps": 16,
+      "trace_tokens": 31161,
+      "billed_tokens": 31161,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-8",
+      "exit_status": "Submitted",
+      "steps": 29,
+      "trace_tokens": 86112,
+      "billed_tokens": 86112,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-15",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5334,
+      "billed_tokens": 5334,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-16",
+      "exit_status": "Submitted",
+      "steps": 34,
+      "trace_tokens": 99345,
+      "billed_tokens": 99345,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-13",
+      "exit_status": "Submitted",
+      "steps": 52,
+      "trace_tokens": 267085,
+      "billed_tokens": 267085,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-14",
+      "exit_status": "Submitted",
+      "steps": 60,
+      "trace_tokens": 325669,
+      "billed_tokens": 325669,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-20",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1937,
+      "billed_tokens": 1937,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-21",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 6221,
+      "billed_tokens": 6221,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-18",
+      "exit_status": "Submitted",
+      "steps": 27,
+      "trace_tokens": 99019,
+      "billed_tokens": 99019,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-17",
+      "exit_status": "Submitted",
+      "steps": 76,
+      "trace_tokens": 497804,
+      "billed_tokens": 497804,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-22",
+      "exit_status": "Submitted",
+      "steps": 38,
+      "trace_tokens": 114380,
+      "billed_tokens": 114380,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-19",
+      "exit_status": "Submitted",
+      "steps": 52,
+      "trace_tokens": 299998,
+      "billed_tokens": 299998,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-25",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 11924,
+      "billed_tokens": 11924,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-24",
+      "exit_status": "Submitted",
+      "steps": 28,
+      "trace_tokens": 106181,
+      "billed_tokens": 106181,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-26",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7252,
+      "billed_tokens": 7252,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-28",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 10743,
+      "billed_tokens": 10743,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-30",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 734,
+      "billed_tokens": 734,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-23",
+      "exit_status": "Submitted",
+      "steps": 60,
+      "trace_tokens": 408211,
+      "billed_tokens": 408211,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-31",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 639,
+      "billed_tokens": 639,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-27",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 10334,
+      "billed_tokens": 10334,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-32",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 785,
+      "billed_tokens": 785,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-34",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 856,
+      "billed_tokens": 856,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-35",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 5835,
+      "billed_tokens": 5835,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-36",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 18502,
+      "billed_tokens": 18502,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-37",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2396,
+      "billed_tokens": 2396,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-33",
+      "exit_status": "Submitted",
+      "steps": 19,
+      "trace_tokens": 46905,
+      "billed_tokens": 46905,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-38",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5892,
+      "billed_tokens": 5892,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-29",
+      "exit_status": "Submitted",
+      "steps": 28,
+      "trace_tokens": 68318,
+      "billed_tokens": 68318,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-42",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6235,
+      "billed_tokens": 6235,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-40",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 14989,
+      "billed_tokens": 14989,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-39",
+      "exit_status": "Submitted",
+      "steps": 28,
+      "trace_tokens": 78899,
+      "billed_tokens": 78899,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-43",
+      "exit_status": "Submitted",
+      "steps": 26,
+      "trace_tokens": 149159,
+      "billed_tokens": 149159,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-41",
+      "exit_status": "Submitted",
+      "steps": 33,
+      "trace_tokens": 160411,
+      "billed_tokens": 160411,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-44",
+      "exit_status": "Submitted",
+      "steps": 21,
+      "trace_tokens": 99542,
+      "billed_tokens": 99542,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-0",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2185,
+      "billed_tokens": 2185,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-47",
+      "exit_status": "Submitted",
+      "steps": 18,
+      "trace_tokens": 33998,
+      "billed_tokens": 33998,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-1",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4666,
+      "billed_tokens": 4666,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-45",
+      "exit_status": "Submitted",
+      "steps": 34,
+      "trace_tokens": 125105,
+      "billed_tokens": 125105,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-3",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 10626,
+      "billed_tokens": 10626,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-2",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 14239,
+      "billed_tokens": 14239,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-6",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5788,
+      "billed_tokens": 5788,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-4",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 11400,
+      "billed_tokens": 11400,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "django-46",
+      "exit_status": "Submitted",
+      "steps": 31,
+      "trace_tokens": 133439,
+      "billed_tokens": 133439,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-5",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 20296,
+      "billed_tokens": 20296,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-7",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 8315,
+      "billed_tokens": 8315,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-8",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2130,
+      "billed_tokens": 2130,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-9",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4853,
+      "billed_tokens": 4853,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-10",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 44281,
+      "billed_tokens": 44281,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-11",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1797,
+      "billed_tokens": 1797,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-12",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4665,
+      "billed_tokens": 4665,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-14",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 7262,
+      "billed_tokens": 7262,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-13",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2975,
+      "billed_tokens": 2975,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-15",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11337,
+      "billed_tokens": 11337,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-17",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3027,
+      "billed_tokens": 3027,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-16",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 9177,
+      "billed_tokens": 9177,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-19",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5705,
+      "billed_tokens": 5705,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-20",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2226,
+      "billed_tokens": 2226,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-18",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6558,
+      "billed_tokens": 6558,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-21",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 14993,
+      "billed_tokens": 14993,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-23",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3664,
+      "billed_tokens": 3664,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-25",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 12302,
+      "billed_tokens": 12302,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-26",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2752,
+      "billed_tokens": 2752,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-24",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7265,
+      "billed_tokens": 7265,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-22",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 4857,
+      "billed_tokens": 4857,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-28",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1540,
+      "billed_tokens": 1540,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-27",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11013,
+      "billed_tokens": 11013,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-31",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3454,
+      "billed_tokens": 3454,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-32",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1540,
+      "billed_tokens": 1540,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-34",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 605,
+      "billed_tokens": 605,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-30",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6189,
+      "billed_tokens": 6189,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-29",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9917,
+      "billed_tokens": 9917,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-33",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3368,
+      "billed_tokens": 3368,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-35",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 4373,
+      "billed_tokens": 4373,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-36",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1369,
+      "billed_tokens": 1369,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-38",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5382,
+      "billed_tokens": 5382,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-39",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 8037,
+      "billed_tokens": 8037,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-40",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2636,
+      "billed_tokens": 2636,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-37",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 8350,
+      "billed_tokens": 8350,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-42",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 6577,
+      "billed_tokens": 6577,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-44",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2445,
+      "billed_tokens": 2445,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-41",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 24030,
+      "billed_tokens": 24030,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-46",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3078,
+      "billed_tokens": 3078,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-45",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9157,
+      "billed_tokens": 9157,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-0",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1576,
+      "billed_tokens": 1576,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-1",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2255,
+      "billed_tokens": 2255,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-43",
+      "exit_status": "Submitted",
+      "steps": 11,
+      "trace_tokens": 31892,
+      "billed_tokens": 31892,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "flask-47",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 22340,
+      "billed_tokens": 22340,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-3",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 4623,
+      "billed_tokens": 4623,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-4",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2118,
+      "billed_tokens": 2118,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-6",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 8375,
+      "billed_tokens": 8375,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-8",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 10586,
+      "billed_tokens": 10586,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-2",
+      "exit_status": "Submitted",
+      "steps": 17,
+      "trace_tokens": 55325,
+      "billed_tokens": 55325,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-5",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11415,
+      "billed_tokens": 11415,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-7",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 26584,
+      "billed_tokens": 26584,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-9",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 8621,
+      "billed_tokens": 8621,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-11",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6484,
+      "billed_tokens": 6484,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-13",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11722,
+      "billed_tokens": 11722,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-14",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7094,
+      "billed_tokens": 7094,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-12",
+      "exit_status": "Submitted",
+      "steps": 20,
+      "trace_tokens": 58691,
+      "billed_tokens": 58691,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-16",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 10119,
+      "billed_tokens": 10119,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-17",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 26934,
+      "billed_tokens": 26934,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-10",
+      "exit_status": "Submitted",
+      "steps": 35,
+      "trace_tokens": 109533,
+      "billed_tokens": 109533,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-19",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1326,
+      "billed_tokens": 1326,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-18",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2758,
+      "billed_tokens": 2758,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-15",
+      "exit_status": "Submitted",
+      "steps": 31,
+      "trace_tokens": 93999,
+      "billed_tokens": 93999,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-22",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 13987,
+      "billed_tokens": 13987,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-23",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9571,
+      "billed_tokens": 9571,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-20",
+      "exit_status": "Submitted",
+      "steps": 20,
+      "trace_tokens": 96739,
+      "billed_tokens": 96739,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-26",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 11580,
+      "billed_tokens": 11580,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-25",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7137,
+      "billed_tokens": 7137,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-28",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1453,
+      "billed_tokens": 1453,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-24",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 36211,
+      "billed_tokens": 36211,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-29",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 627,
+      "billed_tokens": 627,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-21",
+      "exit_status": "Submitted",
+      "steps": 33,
+      "trace_tokens": 159257,
+      "billed_tokens": 159257,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-27",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2613,
+      "billed_tokens": 2613,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-31",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1122,
+      "billed_tokens": 1122,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-32",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 3441,
+      "billed_tokens": 3441,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-34",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 3465,
+      "billed_tokens": 3465,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-35",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2280,
+      "billed_tokens": 2280,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-33",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 7390,
+      "billed_tokens": 7390,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-30",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3921,
+      "billed_tokens": 3921,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-38",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 9839,
+      "billed_tokens": 9839,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-39",
+      "exit_status": "Submitted",
+      "steps": 14,
+      "trace_tokens": 27966,
+      "billed_tokens": 27966,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-37",
+      "exit_status": "Submitted",
+      "steps": 11,
+      "trace_tokens": 37561,
+      "billed_tokens": 37561,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-40",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 14893,
+      "billed_tokens": 14893,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-36",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 31904,
+      "billed_tokens": 31904,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-41",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9240,
+      "billed_tokens": 9240,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-43",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 21554,
+      "billed_tokens": 21554,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-44",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6034,
+      "billed_tokens": 6034,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-45",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7949,
+      "billed_tokens": 7949,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-46",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 27257,
+      "billed_tokens": 27257,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-47",
+      "exit_status": "Submitted",
+      "steps": 11,
+      "trace_tokens": 21847,
+      "billed_tokens": 21847,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-1",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2786,
+      "billed_tokens": 2786,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "matplotlib-42",
+      "exit_status": "Submitted",
+      "steps": 15,
+      "trace_tokens": 38418,
+      "billed_tokens": 38418,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-3",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 10999,
+      "billed_tokens": 10999,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-5",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 21791,
+      "billed_tokens": 21791,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-0",
+      "exit_status": "Submitted",
+      "steps": 13,
+      "trace_tokens": 21711,
+      "billed_tokens": 21711,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-4",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 8201,
+      "billed_tokens": 8201,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-6",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3470,
+      "billed_tokens": 3470,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-2",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 24553,
+      "billed_tokens": 24553,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-10",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 3237,
+      "billed_tokens": 3237,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-8",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 30486,
+      "billed_tokens": 30486,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-9",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 50223,
+      "billed_tokens": 50223,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-7",
+      "exit_status": "Submitted",
+      "steps": 11,
+      "trace_tokens": 31403,
+      "billed_tokens": 31403,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-11",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 3580,
+      "billed_tokens": 3580,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-14",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7613,
+      "billed_tokens": 7613,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-13",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6785,
+      "billed_tokens": 6785,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-12",
+      "exit_status": "Submitted",
+      "steps": 17,
+      "trace_tokens": 43677,
+      "billed_tokens": 43677,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-16",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7214,
+      "billed_tokens": 7214,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-17",
+      "exit_status": "Submitted",
+      "steps": 15,
+      "trace_tokens": 35618,
+      "billed_tokens": 35618,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-19",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6548,
+      "billed_tokens": 6548,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-18",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 19901,
+      "billed_tokens": 19901,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-15",
+      "exit_status": "Submitted",
+      "steps": 20,
+      "trace_tokens": 101387,
+      "billed_tokens": 101387,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-22",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1897,
+      "billed_tokens": 1897,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-20",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 18565,
+      "billed_tokens": 18565,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-24",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2696,
+      "billed_tokens": 2696,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-23",
+      "exit_status": "Submitted",
+      "steps": 18,
+      "trace_tokens": 44607,
+      "billed_tokens": 44607,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-26",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 17117,
+      "billed_tokens": 17117,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-21",
+      "exit_status": "Submitted",
+      "steps": 25,
+      "trace_tokens": 87596,
+      "billed_tokens": 87596,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-27",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 15239,
+      "billed_tokens": 15239,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-25",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 16511,
+      "billed_tokens": 16511,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-28",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 3962,
+      "billed_tokens": 3962,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-29",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2994,
+      "billed_tokens": 2994,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-31",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2173,
+      "billed_tokens": 2173,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-32",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1997,
+      "billed_tokens": 1997,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-34",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1259,
+      "billed_tokens": 1259,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-33",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1698,
+      "billed_tokens": 1698,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-35",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1869,
+      "billed_tokens": 1869,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-30",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2610,
+      "billed_tokens": 2610,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-37",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 13326,
+      "billed_tokens": 13326,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-38",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 23531,
+      "billed_tokens": 23531,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-40",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 15149,
+      "billed_tokens": 15149,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-36",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 21897,
+      "billed_tokens": 21897,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-39",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 17821,
+      "billed_tokens": 17821,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-41",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11119,
+      "billed_tokens": 11119,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-44",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 12852,
+      "billed_tokens": 12852,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-43",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 25058,
+      "billed_tokens": 25058,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-45",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 17586,
+      "billed_tokens": 17586,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-46",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 17336,
+      "billed_tokens": 17336,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-1",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 887,
+      "billed_tokens": 887,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-47",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 10272,
+      "billed_tokens": 10272,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pylint-42",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 13439,
+      "billed_tokens": 13439,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-3",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4439,
+      "billed_tokens": 4439,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-5",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2512,
+      "billed_tokens": 2512,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-2",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 33262,
+      "billed_tokens": 33262,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-7",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2366,
+      "billed_tokens": 2366,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-0",
+      "exit_status": "Submitted",
+      "steps": 11,
+      "trace_tokens": 30827,
+      "billed_tokens": 30827,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-4",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 16758,
+      "billed_tokens": 16758,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-6",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11996,
+      "billed_tokens": 11996,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-8",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11587,
+      "billed_tokens": 11587,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-9",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 28519,
+      "billed_tokens": 28519,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-10",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 10130,
+      "billed_tokens": 10130,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-14",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7617,
+      "billed_tokens": 7617,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-13",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 37610,
+      "billed_tokens": 37610,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-15",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 18117,
+      "billed_tokens": 18117,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-12",
+      "exit_status": "Submitted",
+      "steps": 28,
+      "trace_tokens": 75160,
+      "billed_tokens": 75160,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-16",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 25169,
+      "billed_tokens": 25169,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-18",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 10434,
+      "billed_tokens": 10434,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-19",
+      "exit_status": "Submitted",
+      "steps": 16,
+      "trace_tokens": 34407,
+      "billed_tokens": 34407,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-11",
+      "exit_status": "Submitted",
+      "steps": 31,
+      "trace_tokens": 170792,
+      "billed_tokens": 170792,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-21",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 5742,
+      "billed_tokens": 5742,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-23",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1245,
+      "billed_tokens": 1245,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-22",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 13216,
+      "billed_tokens": 13216,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-20",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 8842,
+      "billed_tokens": 8842,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-24",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2682,
+      "billed_tokens": 2682,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-27",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 7841,
+      "billed_tokens": 7841,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-26",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 44946,
+      "billed_tokens": 44946,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-29",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3245,
+      "billed_tokens": 3245,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-30",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2635,
+      "billed_tokens": 2635,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-31",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1709,
+      "billed_tokens": 1709,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-28",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 10926,
+      "billed_tokens": 10926,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-17",
+      "exit_status": "Submitted",
+      "steps": 40,
+      "trace_tokens": 228254,
+      "billed_tokens": 228254,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-34",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1321,
+      "billed_tokens": 1321,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-33",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3168,
+      "billed_tokens": 3168,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-25",
+      "exit_status": "Submitted",
+      "steps": 25,
+      "trace_tokens": 77551,
+      "billed_tokens": 77551,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-35",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 667,
+      "billed_tokens": 667,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-32",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4992,
+      "billed_tokens": 4992,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-37",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 10289,
+      "billed_tokens": 10289,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-36",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 10890,
+      "billed_tokens": 10890,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-38",
+      "exit_status": "Submitted",
+      "steps": 13,
+      "trace_tokens": 30194,
+      "billed_tokens": 30194,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-41",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3871,
+      "billed_tokens": 3871,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-43",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 13561,
+      "billed_tokens": 13561,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-40",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 18462,
+      "billed_tokens": 18462,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-39",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 53965,
+      "billed_tokens": 53965,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-44",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 9034,
+      "billed_tokens": 9034,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-45",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 9675,
+      "billed_tokens": 9675,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-46",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9481,
+      "billed_tokens": 9481,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-47",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 13916,
+      "billed_tokens": 13916,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "pytest-42",
+      "exit_status": "Submitted",
+      "steps": 40,
+      "trace_tokens": 254482,
+      "billed_tokens": 254482,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-2",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 11979,
+      "billed_tokens": 11979,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-0",
+      "exit_status": "Submitted",
+      "steps": 18,
+      "trace_tokens": 68559,
+      "billed_tokens": 68559,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-4",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6633,
+      "billed_tokens": 6633,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-1",
+      "exit_status": "Submitted",
+      "steps": 43,
+      "trace_tokens": 188549,
+      "billed_tokens": 188549,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-6",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 6596,
+      "billed_tokens": 6596,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-3",
+      "exit_status": "Submitted",
+      "steps": 34,
+      "trace_tokens": 231126,
+      "billed_tokens": 231126,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-8",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 11320,
+      "billed_tokens": 11320,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-5",
+      "exit_status": "Submitted",
+      "steps": 33,
+      "trace_tokens": 109392,
+      "billed_tokens": 109392,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-7",
+      "exit_status": "Submitted",
+      "steps": 14,
+      "trace_tokens": 41183,
+      "billed_tokens": 41183,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-9",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 7056,
+      "billed_tokens": 7056,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-12",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 11528,
+      "billed_tokens": 11528,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-14",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 40687,
+      "billed_tokens": 40687,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-11",
+      "exit_status": "Submitted",
+      "steps": 23,
+      "trace_tokens": 108042,
+      "billed_tokens": 108042,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-16",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 8698,
+      "billed_tokens": 8698,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-15",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 28717,
+      "billed_tokens": 28717,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-18",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 34033,
+      "billed_tokens": 35100,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-17",
+      "exit_status": "Submitted",
+      "steps": 36,
+      "trace_tokens": 129328,
+      "billed_tokens": 129328,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-13",
+      "exit_status": "Submitted",
+      "steps": 58,
+      "trace_tokens": 367768,
+      "billed_tokens": 372742,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-20",
+      "exit_status": "Submitted",
+      "steps": 21,
+      "trace_tokens": 70661,
+      "billed_tokens": 70661,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-19",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 35655,
+      "billed_tokens": 35655,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-21",
+      "exit_status": "Submitted",
+      "steps": 16,
+      "trace_tokens": 36793,
+      "billed_tokens": 36793,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-23",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 17538,
+      "billed_tokens": 17538,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-22",
+      "exit_status": "Submitted",
+      "steps": 25,
+      "trace_tokens": 129298,
+      "billed_tokens": 129298,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-26",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 3368,
+      "billed_tokens": 3368,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-27",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7885,
+      "billed_tokens": 7885,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-25",
+      "exit_status": "Submitted",
+      "steps": 47,
+      "trace_tokens": 186509,
+      "billed_tokens": 186509,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-28",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 15139,
+      "billed_tokens": 15139,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-24",
+      "exit_status": "Submitted",
+      "steps": 57,
+      "trace_tokens": 258538,
+      "billed_tokens": 258538,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-29",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7814,
+      "billed_tokens": 7814,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-30",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 15667,
+      "billed_tokens": 15667,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-31",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 19035,
+      "billed_tokens": 19035,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-34",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6473,
+      "billed_tokens": 6473,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-33",
+      "exit_status": "Submitted",
+      "steps": 33,
+      "trace_tokens": 115823,
+      "billed_tokens": 115823,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-32",
+      "exit_status": "Submitted",
+      "steps": 40,
+      "trace_tokens": 331666,
+      "billed_tokens": 331666,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-36",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 11743,
+      "billed_tokens": 11743,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-37",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 14488,
+      "billed_tokens": 14488,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-35",
+      "exit_status": "Submitted",
+      "steps": 30,
+      "trace_tokens": 78353,
+      "billed_tokens": 78353,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-39",
+      "exit_status": "Submitted",
+      "steps": 15,
+      "trace_tokens": 27979,
+      "billed_tokens": 27979,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-41",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 7830,
+      "billed_tokens": 7830,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-42",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 13928,
+      "billed_tokens": 13928,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-43",
+      "exit_status": "Submitted",
+      "steps": 23,
+      "trace_tokens": 54697,
+      "billed_tokens": 54697,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-38",
+      "exit_status": "Submitted",
+      "steps": 57,
+      "trace_tokens": 397490,
+      "billed_tokens": 397490,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-44",
+      "exit_status": "Submitted",
+      "steps": 53,
+      "trace_tokens": 246892,
+      "billed_tokens": 246892,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-40",
+      "exit_status": "Submitted",
+      "steps": 89,
+      "trace_tokens": 811068,
+      "billed_tokens": 811068,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-46",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 16684,
+      "billed_tokens": 16684,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-47",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1663,
+      "billed_tokens": 1663,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-0",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 4472,
+      "billed_tokens": 4472,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-1",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 3626,
+      "billed_tokens": 3626,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-10",
+      "exit_status": "Submitted",
+      "steps": 74,
+      "trace_tokens": 575445,
+      "billed_tokens": 584148,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-2",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2349,
+      "billed_tokens": 2349,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-4",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 16010,
+      "billed_tokens": 16010,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-3",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 8330,
+      "billed_tokens": 8330,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-5",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 8032,
+      "billed_tokens": 8032,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-6",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3226,
+      "billed_tokens": 3226,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-7",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 3554,
+      "billed_tokens": 3554,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-9",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2924,
+      "billed_tokens": 2924,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-8",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 17821,
+      "billed_tokens": 17821,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-10",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6021,
+      "billed_tokens": 6021,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-13",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2996,
+      "billed_tokens": 2996,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-12",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6921,
+      "billed_tokens": 6921,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-11",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2928,
+      "billed_tokens": 2928,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-15",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 5017,
+      "billed_tokens": 5017,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-14",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5774,
+      "billed_tokens": 5774,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-16",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1772,
+      "billed_tokens": 1772,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-17",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3411,
+      "billed_tokens": 3411,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-19",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6017,
+      "billed_tokens": 6017,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-18",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1973,
+      "billed_tokens": 1973,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-20",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7645,
+      "billed_tokens": 7645,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "reflex-45",
+      "exit_status": "Submitted",
+      "steps": 77,
+      "trace_tokens": 585462,
+      "billed_tokens": 585462,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-22",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2307,
+      "billed_tokens": 2307,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-23",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3847,
+      "billed_tokens": 3847,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-21",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6649,
+      "billed_tokens": 6649,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-27",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4394,
+      "billed_tokens": 4394,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-24",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 9819,
+      "billed_tokens": 9819,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-26",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2348,
+      "billed_tokens": 2348,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-30",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 701,
+      "billed_tokens": 701,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-28",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2301,
+      "billed_tokens": 2301,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-25",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 10719,
+      "billed_tokens": 10719,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-31",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2140,
+      "billed_tokens": 2140,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-32",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2397,
+      "billed_tokens": 2397,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-33",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3596,
+      "billed_tokens": 3596,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-34",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2667,
+      "billed_tokens": 2667,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-35",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1345,
+      "billed_tokens": 1345,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-38",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6220,
+      "billed_tokens": 6220,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-37",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1678,
+      "billed_tokens": 1678,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-29",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 12277,
+      "billed_tokens": 12277,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-36",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2104,
+      "billed_tokens": 2104,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-39",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1699,
+      "billed_tokens": 1699,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-41",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 22570,
+      "billed_tokens": 22570,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-42",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7891,
+      "billed_tokens": 7891,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-43",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5930,
+      "billed_tokens": 5930,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-40",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 8630,
+      "billed_tokens": 8630,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-44",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 5994,
+      "billed_tokens": 5994,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-46",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6691,
+      "billed_tokens": 6691,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-45",
+      "exit_status": "Submitted",
+      "steps": 11,
+      "trace_tokens": 23636,
+      "billed_tokens": 23636,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "requests-47",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 17313,
+      "billed_tokens": 17313,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-2",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4989,
+      "billed_tokens": 4989,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-3",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1715,
+      "billed_tokens": 1715,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-1",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2687,
+      "billed_tokens": 2687,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-0",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 11932,
+      "billed_tokens": 11932,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-5",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1152,
+      "billed_tokens": 1152,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-7",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 847,
+      "billed_tokens": 847,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-6",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1438,
+      "billed_tokens": 1438,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-8",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 21431,
+      "billed_tokens": 21431,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-4",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 17945,
+      "billed_tokens": 17945,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-10",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6288,
+      "billed_tokens": 6288,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-9",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5426,
+      "billed_tokens": 5426,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-14",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5157,
+      "billed_tokens": 5157,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-12",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2839,
+      "billed_tokens": 2839,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-16",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3406,
+      "billed_tokens": 3406,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-11",
+      "exit_status": "Submitted",
+      "steps": 13,
+      "trace_tokens": 24508,
+      "billed_tokens": 24508,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-13",
+      "exit_status": "Submitted",
+      "steps": 18,
+      "trace_tokens": 27322,
+      "billed_tokens": 27322,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-15",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 25615,
+      "billed_tokens": 25615,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-18",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 8971,
+      "billed_tokens": 8971,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-17",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2408,
+      "billed_tokens": 2408,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-20",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 8435,
+      "billed_tokens": 8435,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-21",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11165,
+      "billed_tokens": 11165,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-23",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 10131,
+      "billed_tokens": 10131,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-19",
+      "exit_status": "Submitted",
+      "steps": 20,
+      "trace_tokens": 56693,
+      "billed_tokens": 56693,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-22",
+      "exit_status": "Submitted",
+      "steps": 18,
+      "trace_tokens": 32940,
+      "billed_tokens": 32940,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-27",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5322,
+      "billed_tokens": 5322,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-26",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2913,
+      "billed_tokens": 2913,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-29",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 619,
+      "billed_tokens": 619,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-28",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 746,
+      "billed_tokens": 746,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-31",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 654,
+      "billed_tokens": 654,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-30",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 765,
+      "billed_tokens": 765,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-32",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3479,
+      "billed_tokens": 3479,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-33",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2278,
+      "billed_tokens": 2278,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-35",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4375,
+      "billed_tokens": 4375,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-34",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4353,
+      "billed_tokens": 4353,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-24",
+      "exit_status": "Submitted",
+      "steps": 29,
+      "trace_tokens": 80574,
+      "billed_tokens": 80574,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-36",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 5494,
+      "billed_tokens": 5494,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-37",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 18215,
+      "billed_tokens": 18215,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-38",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 10192,
+      "billed_tokens": 10192,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-40",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4359,
+      "billed_tokens": 4359,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-41",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2158,
+      "billed_tokens": 2158,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-39",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 47780,
+      "billed_tokens": 47780,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-42",
+      "exit_status": "Submitted",
+      "steps": 25,
+      "trace_tokens": 56556,
+      "billed_tokens": 56556,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-45",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9387,
+      "billed_tokens": 9387,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-25",
+      "exit_status": "Submitted",
+      "steps": 50,
+      "trace_tokens": 361194,
+      "billed_tokens": 361194,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-43",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 7040,
+      "billed_tokens": 7040,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-46",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4775,
+      "billed_tokens": 4775,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-44",
+      "exit_status": "Submitted",
+      "steps": 24,
+      "trace_tokens": 84262,
+      "billed_tokens": 84262,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "scikit-learn-47",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 10076,
+      "billed_tokens": 10076,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-2",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 8048,
+      "billed_tokens": 8048,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-3",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1797,
+      "billed_tokens": 1797,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-0",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 3655,
+      "billed_tokens": 3655,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-1",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 10145,
+      "billed_tokens": 10145,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-4",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2887,
+      "billed_tokens": 2887,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-7",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2747,
+      "billed_tokens": 2747,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-5",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5348,
+      "billed_tokens": 5348,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-8",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4819,
+      "billed_tokens": 4819,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-6",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2506,
+      "billed_tokens": 2506,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-11",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 14578,
+      "billed_tokens": 14578,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-10",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 14900,
+      "billed_tokens": 14900,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-12",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 10502,
+      "billed_tokens": 10502,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-9",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 11799,
+      "billed_tokens": 11799,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-14",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 7832,
+      "billed_tokens": 7832,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-15",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 8783,
+      "billed_tokens": 8783,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-13",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 3232,
+      "billed_tokens": 3232,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-17",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2218,
+      "billed_tokens": 2218,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-18",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 13414,
+      "billed_tokens": 13414,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-19",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 22013,
+      "billed_tokens": 22013,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-16",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 12013,
+      "billed_tokens": 12013,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-20",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1807,
+      "billed_tokens": 1807,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-22",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2700,
+      "billed_tokens": 2700,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-21",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9870,
+      "billed_tokens": 9870,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-23",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 14232,
+      "billed_tokens": 14232,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-26",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2399,
+      "billed_tokens": 2399,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-24",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 10571,
+      "billed_tokens": 10571,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-29",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 657,
+      "billed_tokens": 657,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-28",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 26403,
+      "billed_tokens": 26403,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-30",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 4215,
+      "billed_tokens": 4215,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-32",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 3713,
+      "billed_tokens": 3713,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-27",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 26187,
+      "billed_tokens": 26187,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-25",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 24002,
+      "billed_tokens": 24002,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-31",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2258,
+      "billed_tokens": 2258,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-35",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3330,
+      "billed_tokens": 3330,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-36",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 9568,
+      "billed_tokens": 9568,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-38",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 12773,
+      "billed_tokens": 12773,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-33",
+      "exit_status": "Submitted",
+      "steps": 17,
+      "trace_tokens": 55016,
+      "billed_tokens": 55016,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-37",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 23638,
+      "billed_tokens": 23638,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-39",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 19391,
+      "billed_tokens": 19391,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-40",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 10327,
+      "billed_tokens": 10327,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-41",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2275,
+      "billed_tokens": 2275,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-42",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1919,
+      "billed_tokens": 1919,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-43",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 17150,
+      "billed_tokens": 17150,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-44",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 16946,
+      "billed_tokens": 16946,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-45",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 17848,
+      "billed_tokens": 17848,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-47",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 12755,
+      "billed_tokens": 12755,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-46",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 13847,
+      "billed_tokens": 13847,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-0",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 12550,
+      "billed_tokens": 12550,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-2",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 2857,
+      "billed_tokens": 2857,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-1",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 13178,
+      "billed_tokens": 13178,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-4",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3827,
+      "billed_tokens": 3827,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-6",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2671,
+      "billed_tokens": 2671,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-3",
+      "exit_status": "Submitted",
+      "steps": 11,
+      "trace_tokens": 25332,
+      "billed_tokens": 25332,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-7",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3634,
+      "billed_tokens": 3634,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-5",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 4890,
+      "billed_tokens": 4890,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-8",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6724,
+      "billed_tokens": 6724,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-10",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 13390,
+      "billed_tokens": 13390,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-9",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5794,
+      "billed_tokens": 5794,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-11",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 16055,
+      "billed_tokens": 16055,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sphinx-34",
+      "exit_status": "Submitted",
+      "steps": 79,
+      "trace_tokens": 854743,
+      "billed_tokens": 854743,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-12",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11333,
+      "billed_tokens": 11333,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-14",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 4466,
+      "billed_tokens": 4466,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-16",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3664,
+      "billed_tokens": 3664,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-15",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1988,
+      "billed_tokens": 1988,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-18",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4745,
+      "billed_tokens": 4745,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-17",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 13456,
+      "billed_tokens": 13456,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-19",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 6403,
+      "billed_tokens": 6403,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-21",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2154,
+      "billed_tokens": 2154,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-20",
+      "exit_status": "Submitted",
+      "steps": 11,
+      "trace_tokens": 24544,
+      "billed_tokens": 24544,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-13",
+      "exit_status": "Submitted",
+      "steps": 20,
+      "trace_tokens": 93366,
+      "billed_tokens": 93366,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-23",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 5584,
+      "billed_tokens": 5584,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-25",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3876,
+      "billed_tokens": 3876,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-24",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 14786,
+      "billed_tokens": 14786,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-28",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2964,
+      "billed_tokens": 2964,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-27",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 14049,
+      "billed_tokens": 14049,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-30",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1639,
+      "billed_tokens": 1639,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-26",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 9183,
+      "billed_tokens": 9183,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-22",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 9910,
+      "billed_tokens": 9910,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-29",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4299,
+      "billed_tokens": 4299,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-32",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2964,
+      "billed_tokens": 2964,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-34",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1433,
+      "billed_tokens": 1433,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-33",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4439,
+      "billed_tokens": 4439,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-35",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 17401,
+      "billed_tokens": 17401,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-31",
+      "exit_status": "Submitted",
+      "steps": 15,
+      "trace_tokens": 67641,
+      "billed_tokens": 67641,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-36",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6514,
+      "billed_tokens": 6514,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-37",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 19955,
+      "billed_tokens": 19955,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-39",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 7951,
+      "billed_tokens": 7951,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-38",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 8820,
+      "billed_tokens": 8820,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-42",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 9928,
+      "billed_tokens": 9928,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-43",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6383,
+      "billed_tokens": 6383,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-45",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4757,
+      "billed_tokens": 4757,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-41",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 41932,
+      "billed_tokens": 41932,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-44",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 15829,
+      "billed_tokens": 15829,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-46",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3228,
+      "billed_tokens": 3228,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-40",
+      "exit_status": "Submitted",
+      "steps": 23,
+      "trace_tokens": 79629,
+      "billed_tokens": 79629,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-1",
+      "exit_status": "OSError",
+      "steps": 7,
+      "trace_tokens": 12730,
+      "billed_tokens": 12730,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sqlfluff-47",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 23776,
+      "billed_tokens": 23776,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-4",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 8633,
+      "billed_tokens": 8633,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-2",
+      "exit_status": "Submitted",
+      "steps": 23,
+      "trace_tokens": 103145,
+      "billed_tokens": 103145,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-5",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2508,
+      "billed_tokens": 2508,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-3",
+      "exit_status": "Submitted",
+      "steps": 13,
+      "trace_tokens": 31429,
+      "billed_tokens": 31429,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-0",
+      "exit_status": "Submitted",
+      "steps": 36,
+      "trace_tokens": 193273,
+      "billed_tokens": 193273,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-8",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 10504,
+      "billed_tokens": 10504,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-9",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 3714,
+      "billed_tokens": 3714,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-11",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 16063,
+      "billed_tokens": 16063,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-10",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 15401,
+      "billed_tokens": 15401,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-7",
+      "exit_status": "Submitted",
+      "steps": 34,
+      "trace_tokens": 105189,
+      "billed_tokens": 105189,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-6",
+      "exit_status": "Submitted",
+      "steps": 46,
+      "trace_tokens": 189013,
+      "billed_tokens": 189013,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-12",
+      "exit_status": "Submitted",
+      "steps": 26,
+      "trace_tokens": 105936,
+      "billed_tokens": 105936,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-14",
+      "exit_status": "Submitted",
+      "steps": 21,
+      "trace_tokens": 69653,
+      "billed_tokens": 69653,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-16",
+      "exit_status": "Submitted",
+      "steps": 22,
+      "trace_tokens": 53589,
+      "billed_tokens": 53589,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-15",
+      "exit_status": "Submitted",
+      "steps": 22,
+      "trace_tokens": 96232,
+      "billed_tokens": 96232,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-19",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 13104,
+      "billed_tokens": 13104,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-17",
+      "exit_status": "Submitted",
+      "steps": 36,
+      "trace_tokens": 171660,
+      "billed_tokens": 171660,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-20",
+      "exit_status": "Submitted",
+      "steps": 17,
+      "trace_tokens": 48349,
+      "billed_tokens": 48349,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-13",
+      "exit_status": "Submitted",
+      "steps": 70,
+      "trace_tokens": 435054,
+      "billed_tokens": 435054,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-18",
+      "exit_status": "Submitted",
+      "steps": 50,
+      "trace_tokens": 198999,
+      "billed_tokens": 198999,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-22",
+      "exit_status": "Submitted",
+      "steps": 13,
+      "trace_tokens": 21660,
+      "billed_tokens": 21660,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-21",
+      "exit_status": "Submitted",
+      "steps": 19,
+      "trace_tokens": 72698,
+      "billed_tokens": 72698,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-24",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9030,
+      "billed_tokens": 9030,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-23",
+      "exit_status": "Submitted",
+      "steps": 25,
+      "trace_tokens": 70996,
+      "billed_tokens": 70996,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-27",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2110,
+      "billed_tokens": 2110,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-28",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6898,
+      "billed_tokens": 6898,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-25",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 49165,
+      "billed_tokens": 49165,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-26",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 17677,
+      "billed_tokens": 17677,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-30",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4354,
+      "billed_tokens": 4354,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-29",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6434,
+      "billed_tokens": 6434,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-31",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6221,
+      "billed_tokens": 6221,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-35",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5006,
+      "billed_tokens": 5006,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-33",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 26462,
+      "billed_tokens": 26462,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-36",
+      "exit_status": "Submitted",
+      "steps": 14,
+      "trace_tokens": 25116,
+      "billed_tokens": 25116,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-32",
+      "exit_status": "Submitted",
+      "steps": 39,
+      "trace_tokens": 152007,
+      "billed_tokens": 152007,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-34",
+      "exit_status": "Submitted",
+      "steps": 29,
+      "trace_tokens": 112097,
+      "billed_tokens": 112097,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-40",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 28917,
+      "billed_tokens": 28917,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-39",
+      "exit_status": "Submitted",
+      "steps": 15,
+      "trace_tokens": 53657,
+      "billed_tokens": 53657,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-41",
+      "exit_status": "Submitted",
+      "steps": 13,
+      "trace_tokens": 27680,
+      "billed_tokens": 27680,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-42",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1368,
+      "billed_tokens": 1368,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-37",
+      "exit_status": "Submitted",
+      "steps": 36,
+      "trace_tokens": 192912,
+      "billed_tokens": 192912,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-44",
+      "exit_status": "Submitted",
+      "steps": 28,
+      "trace_tokens": 57690,
+      "billed_tokens": 57690,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-43",
+      "exit_status": "Submitted",
+      "steps": 26,
+      "trace_tokens": 81681,
+      "billed_tokens": 81681,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-45",
+      "exit_status": "Submitted",
+      "steps": 34,
+      "trace_tokens": 135972,
+      "billed_tokens": 135972,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-38",
+      "exit_status": "Submitted",
+      "steps": 70,
+      "trace_tokens": 618205,
+      "billed_tokens": 618205,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-46",
+      "exit_status": "Submitted",
+      "steps": 36,
+      "trace_tokens": 108251,
+      "billed_tokens": 108251,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-1",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5023,
+      "billed_tokens": 5023,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-0",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 7395,
+      "billed_tokens": 7395,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-4",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4499,
+      "billed_tokens": 4499,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-3",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 9063,
+      "billed_tokens": 9063,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-2",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 6543,
+      "billed_tokens": 6543,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-5",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5067,
+      "billed_tokens": 5067,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-7",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4120,
+      "billed_tokens": 4120,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-6",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4369,
+      "billed_tokens": 4369,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-8",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 5393,
+      "billed_tokens": 5393,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-11",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3892,
+      "billed_tokens": 3892,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-9",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3191,
+      "billed_tokens": 3191,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-10",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 17963,
+      "billed_tokens": 17963,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-12",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 13366,
+      "billed_tokens": 13366,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-14",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4542,
+      "billed_tokens": 4542,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-15",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6601,
+      "billed_tokens": 6601,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "streamlink-47",
+      "exit_status": "Submitted",
+      "steps": 52,
+      "trace_tokens": 293761,
+      "billed_tokens": 293761,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-13",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 16215,
+      "billed_tokens": 16215,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-18",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1523,
+      "billed_tokens": 1523,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-16",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 6241,
+      "billed_tokens": 6241,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-17",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 8906,
+      "billed_tokens": 8906,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-19",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 10936,
+      "billed_tokens": 10936,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-21",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 13498,
+      "billed_tokens": 13498,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-22",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 47313,
+      "billed_tokens": 47313,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-20",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 21336,
+      "billed_tokens": 21336,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-26",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5288,
+      "billed_tokens": 5288,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-24",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 13554,
+      "billed_tokens": 13554,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-27",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 932,
+      "billed_tokens": 932,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-29",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 620,
+      "billed_tokens": 620,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-25",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 24363,
+      "billed_tokens": 24363,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-28",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1437,
+      "billed_tokens": 1437,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-30",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 708,
+      "billed_tokens": 708,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-32",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1988,
+      "billed_tokens": 1988,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-34",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 617,
+      "billed_tokens": 617,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-33",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1971,
+      "billed_tokens": 1971,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-31",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3595,
+      "billed_tokens": 3595,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-35",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 759,
+      "billed_tokens": 759,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-36",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 6384,
+      "billed_tokens": 6384,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-23",
+      "exit_status": "Submitted",
+      "steps": 26,
+      "trace_tokens": 98828,
+      "billed_tokens": 98828,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-37",
+      "exit_status": "Submitted",
+      "steps": 9,
+      "trace_tokens": 36594,
+      "billed_tokens": 36594,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-40",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 7753,
+      "billed_tokens": 7753,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-42",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 3344,
+      "billed_tokens": 3344,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-41",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 7424,
+      "billed_tokens": 7424,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-39",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 13134,
+      "billed_tokens": 13134,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-44",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4314,
+      "billed_tokens": 4314,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-38",
+      "exit_status": "Submitted",
+      "steps": 22,
+      "trace_tokens": 108215,
+      "billed_tokens": 108215,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-43",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 15452,
+      "billed_tokens": 15452,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-0",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 27075,
+      "billed_tokens": 27075,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-45",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 3989,
+      "billed_tokens": 3989,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-46",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 33997,
+      "billed_tokens": 33997,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-1",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9923,
+      "billed_tokens": 9923,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-4",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 749,
+      "billed_tokens": 749,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-5",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1886,
+      "billed_tokens": 1886,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "sympy-47",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 15170,
+      "billed_tokens": 15170,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-2",
+      "exit_status": "Submitted",
+      "steps": 12,
+      "trace_tokens": 28633,
+      "billed_tokens": 28633,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-6",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 7315,
+      "billed_tokens": 7315,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-7",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9721,
+      "billed_tokens": 9721,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-8",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 12976,
+      "billed_tokens": 12976,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-3",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 18975,
+      "billed_tokens": 18975,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-9",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 4103,
+      "billed_tokens": 4103,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-12",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5989,
+      "billed_tokens": 5989,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-13",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 8639,
+      "billed_tokens": 8639,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-11",
+      "exit_status": "Submitted",
+      "steps": 14,
+      "trace_tokens": 40496,
+      "billed_tokens": 40496,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-10",
+      "exit_status": "Submitted",
+      "steps": 7,
+      "trace_tokens": 16437,
+      "billed_tokens": 16437,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-16",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1373,
+      "billed_tokens": 1373,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-14",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 2169,
+      "billed_tokens": 2169,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-18",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 4618,
+      "billed_tokens": 4618,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-19",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 9237,
+      "billed_tokens": 9237,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-20",
+      "exit_status": "OSError",
+      "steps": 1,
+      "trace_tokens": 671,
+      "billed_tokens": 671,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-15",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 12087,
+      "billed_tokens": 12087,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-17",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 8817,
+      "billed_tokens": 8817,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-23",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 3523,
+      "billed_tokens": 3523,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-21",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11468,
+      "billed_tokens": 11468,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-22",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1815,
+      "billed_tokens": 1815,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-24",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 14457,
+      "billed_tokens": 14457,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-28",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 8212,
+      "billed_tokens": 8212,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-26",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6201,
+      "billed_tokens": 6201,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-29",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 4027,
+      "billed_tokens": 4027,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-25",
+      "exit_status": "Submitted",
+      "steps": 8,
+      "trace_tokens": 12592,
+      "billed_tokens": 12592,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-31",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1745,
+      "billed_tokens": 1745,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-32",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1523,
+      "billed_tokens": 1523,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-30",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 9284,
+      "billed_tokens": 9284,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-34",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 585,
+      "billed_tokens": 585,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-33",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 2834,
+      "billed_tokens": 2834,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-35",
+      "exit_status": "Submitted",
+      "steps": 2,
+      "trace_tokens": 1484,
+      "billed_tokens": 1484,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-37",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 6878,
+      "billed_tokens": 6878,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-39",
+      "exit_status": "Submitted",
+      "steps": 1,
+      "trace_tokens": 1002,
+      "billed_tokens": 1002,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-36",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 11801,
+      "billed_tokens": 11801,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-38",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 14688,
+      "billed_tokens": 14688,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-27",
+      "exit_status": "Submitted",
+      "steps": 6,
+      "trace_tokens": 14557,
+      "billed_tokens": 14557,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-41",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 5344,
+      "billed_tokens": 5344,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-43",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 10349,
+      "billed_tokens": 10349,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-40",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 14144,
+      "billed_tokens": 14144,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-44",
+      "exit_status": "Submitted",
+      "steps": 4,
+      "trace_tokens": 7275,
+      "billed_tokens": 7275,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-45",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 5334,
+      "billed_tokens": 5334,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-47",
+      "exit_status": "Submitted",
+      "steps": 5,
+      "trace_tokens": 11715,
+      "billed_tokens": 11715,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-46",
+      "exit_status": "Submitted",
+      "steps": 10,
+      "trace_tokens": 24402,
+      "billed_tokens": 24402,
+      "cost_usd": 0.0,
+      "correct": null
+    },
+    {
+      "instance_id": "xarray-42",
+      "exit_status": "Submitted",
+      "steps": 3,
+      "trace_tokens": 8928,
+      "billed_tokens": 8928,
+      "cost_usd": 0.0,
+      "correct": null
+    }
+  ]
+}

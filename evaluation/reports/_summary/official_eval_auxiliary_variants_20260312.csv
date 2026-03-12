@@ -1,0 +1,31 @@
+model,variant_group,method_label,method_raw,run_id,record_count,setting_role,notes
+GPT-OSS-120B,oracle_sniper,miniswe_tools_oracle_sniper__smoke__feedback_rule__oracle_sniper,miniswe_tools_oracle_sniper__smoke__feedback_rule__oracle_sniper,20260303_164249,560,appendix_only,Oracle-only upper-bound/debug setting; appendix only.
+GPT-OSS-120B,oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,20260226_121956,560,appendix_only,Oracle-only upper-bound/debug setting; appendix only.
+GPT-OSS-120B,oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,20260302_112906,560,appendix_only,Oracle-only upper-bound/debug setting; appendix only.
+GPT-OSS-120B,oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,20260302_151500,560,appendix_only,Oracle-only upper-bound/debug setting; appendix only.
+GPT-OSS-120B,oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,20260302_215647,560,appendix_only,Oracle-only upper-bound/debug setting; appendix only.
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260226_125920,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260227_002241,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260227_163827,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260228_120111,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260228_162756,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260301_142941,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260301_202919,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260301_230028,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260302_155409,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260304_235901,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260305_110533,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+GPT-OSS-120B,legacy_navigation,codenav_legacy,radar_legacy,20260309_201142,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+Qwen2.5-72B-Instruct-GPTQ-Int4,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260224_100724,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+Qwen2.5-72B-Instruct-GPTQ-Int4,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260224_122729,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+Qwen2.5-72B-Instruct-GPTQ-Int4,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260305_150343,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+Qwen2.5-72B-Instruct-GPTQ-Int4,prompt_variant,miniswe_tools__search_fallback,miniswe_tools__search_fallback,20260201_154727,560,appendix_only,Prompt variant of Snippet Search; appendix only.
+Qwen2.5-72B-Instruct-GPTQ-Int4,prompt_variant,miniswe_tools__search_first,miniswe_tools__search_first,20260201_142909,560,appendix_only,Prompt variant of Snippet Search; appendix only.
+Qwen3-Coder-30B-A3B-Instruct,oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,20260224_214232,1,appendix_only,Oracle-only upper-bound/debug setting; appendix only.
+Qwen3-Coder-30B-A3B-Instruct,oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,20260224_214306,1,appendix_only,Oracle-only upper-bound/debug setting; appendix only.
+Qwen3-Coder-30B-A3B-Instruct,oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,20260224_214333,2,appendix_only,Oracle-only upper-bound/debug setting; appendix only.
+Qwen3-Coder-30B-A3B-Instruct,oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,miniswe_tools_oracle_sniper__smoke__oracle_sniper,20260224_215650,560,appendix_only,Oracle-only upper-bound/debug setting; appendix only.
+Qwen3-Coder-30B-A3B-Instruct,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260223_162533,1,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+Qwen3-Coder-30B-A3B-Instruct,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260223_170944,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+Qwen3-Coder-30B-A3B-Instruct,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260224_154605,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."
+Qwen3-Coder-30B-A3B-Instruct,legacy_navigation,miniswe_tools_codenav,miniswe_tools_radar,20260306_000149,560,appendix_only,"Earlier navigation stack; keep in appendix/ablation, not main result tables."

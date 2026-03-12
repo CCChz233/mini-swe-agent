@@ -191,9 +191,9 @@ def _normalize_candidate_path(
     try:
         candidate = (repo_path / rel).resolve()
         candidate.relative_to(repo_path.resolve())
+        if not candidate.is_file():
+            return ""
     except (OSError, ValueError):
-        return ""
-    if not candidate.is_file():
         return ""
     return candidate.relative_to(repo_path).as_posix()
 

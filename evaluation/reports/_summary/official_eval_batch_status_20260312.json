@@ -1,0 +1,466 @@
+[
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260127_220416",
+    "traj_count": 0,
+    "record_count": 0,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_bash__20260127_220416.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260130_153111",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_bash__20260130_153111.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260226_143612",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_bash__20260226_143612.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260301_152359",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_bash__20260301_152359.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260305_010927",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_bash__20260305_010927.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260305_122240",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_bash__20260305_122240.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260127_224545",
+    "traj_count": 0,
+    "record_count": 0,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools__20260127_224545.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260130_160511",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools__20260130_160511.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260201_121718",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools__20260201_121718.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260226_150756",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools__20260226_150756.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260301_162901",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools__20260301_162901.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260305_014011",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools__20260305_014011.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260305_125922",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools__20260305_125922.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_oracle_sniper__smoke__feedback_rule__oracle_sniper",
+    "run_id": "20260303_164249",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_oracle_sniper__smoke__feedback_rule__oracle_sniper__20260303_164249.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_oracle_sniper__smoke__oracle_sniper",
+    "run_id": "20260226_121956",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_oracle_sniper__smoke__oracle_sniper__20260226_121956.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_oracle_sniper__smoke__oracle_sniper",
+    "run_id": "20260302_112906",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_oracle_sniper__smoke__oracle_sniper__20260302_112906.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_oracle_sniper__smoke__oracle_sniper",
+    "run_id": "20260302_151500",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_oracle_sniper__smoke__oracle_sniper__20260302_151500.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_oracle_sniper__smoke__oracle_sniper",
+    "run_id": "20260302_215647",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_oracle_sniper__smoke__oracle_sniper__20260302_215647.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260226_125920",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260226_125920.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260227_002241",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260227_002241.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260227_163827",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260227_163827.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260228_120111",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260228_120111.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260228_162756",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260228_162756.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260301_142941",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260301_142941.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260301_202919",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260301_202919.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260301_230028",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260301_230028.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260302_155409",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260302_155409.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260304_235901",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260304_235901.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260305_110533",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/miniswe_tools_radar__20260305_110533.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "radar_legacy",
+    "run_id": "20260309_201142",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/radar_legacy__20260309_201142.json"
+  },
+  {
+    "model": "GPT-OSS-120B",
+    "method_raw": "radar_tree",
+    "run_id": "20260309_212351",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/GPT-OSS-120B/radar_tree__20260309_212351.json"
+  },
+  {
+    "model": "Qwen2.5-72B-Instruct-GPTQ-Int4",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260201_194912",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen2.5-72B-Instruct-GPTQ-Int4/miniswe_bash__20260201_194912.json"
+  },
+  {
+    "model": "Qwen2.5-72B-Instruct-GPTQ-Int4",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260305_185720",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen2.5-72B-Instruct-GPTQ-Int4/miniswe_bash__20260305_185720.json"
+  },
+  {
+    "model": "Qwen2.5-72B-Instruct-GPTQ-Int4",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260201_165819",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen2.5-72B-Instruct-GPTQ-Int4/miniswe_tools__20260201_165819.json"
+  },
+  {
+    "model": "Qwen2.5-72B-Instruct-GPTQ-Int4",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260305_201631",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen2.5-72B-Instruct-GPTQ-Int4/miniswe_tools__20260305_201631.json"
+  },
+  {
+    "model": "Qwen2.5-72B-Instruct-GPTQ-Int4",
+    "method_raw": "miniswe_tools__search_fallback",
+    "run_id": "20260201_154727",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen2.5-72B-Instruct-GPTQ-Int4/miniswe_tools__search_fallback__20260201_154727.json"
+  },
+  {
+    "model": "Qwen2.5-72B-Instruct-GPTQ-Int4",
+    "method_raw": "miniswe_tools__search_first",
+    "run_id": "20260201_142909",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen2.5-72B-Instruct-GPTQ-Int4/miniswe_tools__search_first__20260201_142909.json"
+  },
+  {
+    "model": "Qwen2.5-72B-Instruct-GPTQ-Int4",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260224_100724",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen2.5-72B-Instruct-GPTQ-Int4/miniswe_tools_radar__20260224_100724.json"
+  },
+  {
+    "model": "Qwen2.5-72B-Instruct-GPTQ-Int4",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260224_122729",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen2.5-72B-Instruct-GPTQ-Int4/miniswe_tools_radar__20260224_122729.json"
+  },
+  {
+    "model": "Qwen2.5-72B-Instruct-GPTQ-Int4",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260305_150343",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen2.5-72B-Instruct-GPTQ-Int4/miniswe_tools_radar__20260305_150343.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260128_141809",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_bash__20260128_141809.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260225_021635",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_bash__20260225_021635.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260306_025513",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_bash__20260306_025513.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260128_155620",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools__20260128_155620.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260225_033039",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools__20260225_033039.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260306_043958",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools__20260306_043958.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools_oracle_sniper__smoke__oracle_sniper",
+    "run_id": "20260224_214232",
+    "traj_count": 1,
+    "record_count": 1,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools_oracle_sniper__smoke__oracle_sniper__20260224_214232.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools_oracle_sniper__smoke__oracle_sniper",
+    "run_id": "20260224_214306",
+    "traj_count": 1,
+    "record_count": 1,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools_oracle_sniper__smoke__oracle_sniper__20260224_214306.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools_oracle_sniper__smoke__oracle_sniper",
+    "run_id": "20260224_214333",
+    "traj_count": 2,
+    "record_count": 2,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools_oracle_sniper__smoke__oracle_sniper__20260224_214333.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools_oracle_sniper__smoke__oracle_sniper",
+    "run_id": "20260224_215650",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools_oracle_sniper__smoke__oracle_sniper__20260224_215650.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260223_162533",
+    "traj_count": 1,
+    "record_count": 1,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools_radar__20260223_162533.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260223_170944",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools_radar__20260223_170944.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260224_154605",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools_radar__20260224_154605.json"
+  },
+  {
+    "model": "Qwen3-Coder-30B-A3B-Instruct",
+    "method_raw": "miniswe_tools_radar",
+    "run_id": "20260306_000149",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/Qwen3-Coder-30B-A3B-Instruct/miniswe_tools_radar__20260306_000149.json"
+  },
+  {
+    "model": "gemini-3-flash-preview",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260311_030304",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/gemini-3-flash-preview/miniswe_bash__20260311_030304.json"
+  },
+  {
+    "model": "gemini-3-flash-preview",
+    "method_raw": "miniswe_tools",
+    "run_id": "20260311_050240",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/gemini-3-flash-preview/miniswe_tools__20260311_050240.json"
+  },
+  {
+    "model": "gemini-3-flash-preview",
+    "method_raw": "miniswe_tools_codenav",
+    "run_id": "20260310_235113",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/gemini-3-flash-preview/miniswe_tools_codenav__20260310_235113.json"
+  },
+  {
+    "model": "qwen3.5-plus",
+    "method_raw": "miniswe_bash",
+    "run_id": "20260223_225913",
+    "traj_count": 560,
+    "record_count": 560,
+    "metrics_json": "/Users/chz/workspace/mini-swe-agent/evaluation/reports/qwen3.5-plus/miniswe_bash__20260223_225913.json"
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "benchmark": "swe_qa_bench",
+    "candidate_model": "GPT-OSS-120B",
+    "method": "miniswe_tools",
+    "answers_path": "",
+    "judge_config": {
+      "model": "deepseek-v3.2",
+      "prompt_hash": "ccf47da4",
+      "temperature": 0.0,
+      "rounds": 1,
+      "agg": "median",
+      "weights": {
+        "correctness": 0.2,
+        "completeness": 0.2,
+        "relevance": 0.2,
+        "clarity": 0.2,
+        "reasoning": 0.2
+      },
+      "pass_metric": "weighted"
+    }
+  },
+  "stats_overall": {
+    "repos_scored": 15,
+    "total_records": 706,
+    "pass_rate": 0.8016997167138811,
+    "avg_score": 7.93966005665723,
+    "avg_weighted_score": 7.93966005665723,
+    "pass_threshold": 7.0
+  },
+  "stats_dimensions": {
+    "correctness": 7.872521246458923,
+    "completeness": 6.31586402266289,
+    "relevance": 9.298866855524079,
+    "clarity": 8.88243626062323,
+    "reasoning": 7.328611898016997
+  },
+  "grouped_stats": {
+    "category": {},
+    "difficulty": {}
+  },
+  "repos": [
+    "astropy",
+    "conan",
+    "django",
+    "flask",
+    "matplotlib",
+    "pylint",
+    "pytest",
+    "reflex",
+    "requests",
+    "scikit-learn",
+    "sphinx",
+    "sqlfluff",
+    "streamlink",
+    "sympy",
+    "xarray"
+  ],
+  "run_id": "20260208_171353"
+}
